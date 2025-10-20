@@ -42,3 +42,4 @@ class Database {
         return $this->pdo;
     }
 }
+//V Finale, quelques problèmes concernant la db, les tables ne s'affichent pas mais sont bien là ;)
