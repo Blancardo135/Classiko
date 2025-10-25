@@ -1,4 +1,5 @@
 <?php
+//permet d'éditer un joueur
 require '../src/PlayersManager.php';
 
 $playersManager = new PlayersManager();

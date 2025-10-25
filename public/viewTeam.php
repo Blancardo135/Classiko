@@ -1,4 +1,5 @@
 <?php
+//view team 
 require '../src/TeamsManager.php';
 
 $teamsManager = new TeamsManager();
