@@ -8,27 +8,9 @@ class TeamsManager
 
     public function __construct()
     {
-<<<<<<< HEAD
         // On se connecte à la base SQLite via la classe Database
         $db = new Database();
         $this->pdo = $db->getPdo();
-=======
-        $host = 'b35v6r.myd.infomaniak.com';
-        $port = 3306;
-        $db   = 'b35v6r_classiko';
-        $user = 'b35v6r_ropira';
-        $pass = 'Ropira113013.';
-        $charset = 'utf8mb4';
-
-        $dsn = "mysql:host=$host;port=$port;dbname=$db;charset=$charset";
-
-        $options = [
-            PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        ];
-
-        $this->pdo = new PDO($dsn, $user, $pass, $options);
->>>>>>> 2d6fbae8cc5a14b4f83c4ae34c5cac5cb01e168f
     }
 
     public function addTeam(Team $team)
