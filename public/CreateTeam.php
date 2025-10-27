@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../src/TeamsManager.php';
 require_once __DIR__ . '/../src/PlayersManager.php';
+require_once __DIR__ . '/../src/Team.php';
 
 $teamsManager = new TeamsManager();
 

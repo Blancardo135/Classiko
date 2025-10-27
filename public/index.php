@@ -187,7 +187,7 @@ $players = $playersManager->getPlayers();
 
 <body>
     <header>
-        <h1>⚽ Gestionnaire d'équipes et de joueurs</h1>
+        <h1>Gestionnaire d'équipes et de joueurs</h1>
         <p class="subtitle">Gérez vos équipes favorites et vos joueurs préférés</p>
     </header>
 
@@ -199,7 +199,7 @@ $players = $playersManager->getPlayers();
     <!-- Section Équipes -->
     <div class="content-section">
         <div class="section-header">
-            <h2>🏆 Mes Équipes</h2>
+            <h2>Mes Équipes</h2>
             <span><?= count($teams) ?> équipe(s)</span>
         </div>
 
@@ -230,7 +230,7 @@ $players = $playersManager->getPlayers();
     <!-- Section Joueurs -->
     <div class="content-section">
         <div class="section-header">
-            <h2>👥 Mes Joueurs</h2>
+            <h2>Mes Joueurs</h2>
             <span><?= count($players) ?> joueur(s)</span>
         </div>
 
