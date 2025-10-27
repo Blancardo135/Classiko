@@ -5,10 +5,11 @@ class TeamsManager {
     private $pdo;
 
     public function __construct() {
-        $host = 'localhost';
-        $db   = 'classiko_db';
-        $user = 'b35v6r_ropira';
-        $pass = 'Ropira113013.';
+        // 🔧 Configuration pour Infomaniak
+        $host = '127.0.0.1'; // ← crucial : ne pas utiliser 'localhost'
+        $db   = 'classiko_db'; // ← nom de ta base
+        $user = 'b35v6r_ropira'; // ← utilisateur
+        $pass = 'Ropira113013.'; // ← mot de passe
         $charset = 'utf8mb4';
 
         $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
