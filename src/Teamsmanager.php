@@ -1,94 +1,65 @@
 <?php
+// src/TeamsManager.php
+require_once __DIR__ . '/Database.php';
 require_once __DIR__ . '/Team.php';
 
 class TeamsManager
 {
-    private $pdo;
+    private PDO $pdo;
 
     public function __construct()
     {
-        $host = 'b35v6r.myd.infomaniak.com';
-        $port = 3306;
-        $db   = 'b35v6r_classiko';
-        $user = 'b35v6r_ropira';
-        $pass = 'Ropira113013.';
-        $charset = 'utf8mb4';
-
-        $dsn = "mysql:host=$host;port=$port;dbname=$db;charset=$charset";
-
-        $options = [
-            PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        ];
-
-        $this->pdo = new PDO($dsn, $user, $pass, $options);
+        $this->pdo = Database::getInstance()->getPdo();
     }
 
-    public function addTeam(Team $team)
+    public function getAllTeams(): array
     {
-        $sql = "INSERT INTO teams (name, nbPlayers, descr, sport) VALUES (?, ?, ?, ?)";
-        $stmt = $this->pdo->prepare($sql);
+        $stmt = $this->pdo->query("SELECT * FROM teams ORDER BY id DESC");
+        $teams = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $teams[] = new Team($row['name'], (int)$row['nbPlayers'], $row['descr'], $row['sport'], (int)$row['id']);
+        }
+        return $teams;
+    }
+
+    public function getTeam(int $id): ?Team
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM teams WHERE id = ?");
+        $stmt->execute([$id]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($row) {
+            return new Team($row['name'], (int)$row['nbPlayers'], $row['descr'], $row['sport'], (int)$row['id']);
+        }
+        return null;
+    }
+
+    public function addTeam(Team $team): int
+    {
+        $stmt = $this->pdo->prepare("INSERT INTO teams (name, nbPlayers, descr, sport) VALUES (?, ?, ?, ?)");
         $stmt->execute([
             $team->getName(),
             $team->getNbPlayers(),
             $team->getDescr(),
             $team->getSport()
         ]);
-        return $this->pdo->lastInsertId();
+        return (int)$this->pdo->lastInsertId();
     }
 
-    public function getAllTeams()
+    public function updateTeam(int $id, Team $team): bool
     {
-        $stmt = $this->pdo->query("SELECT * FROM teams");
-        $teams = [];
-
-        while ($row = $stmt->fetch()) {
-            $teams[] = new Team(
-                $row['name'],
-                $row['nbPlayers'],
-                $row['descr'],
-                $row['sport'],
-                $row['id']
-            );
-        }
-
-        return $teams;
-    }
-
-    public function getTeamById($id)
-    {
-        $stmt = $this->pdo->prepare("SELECT * FROM teams WHERE id = ?");
-        $stmt->execute([$id]);
-        $row = $stmt->fetch();
-
-        if ($row) {
-            return new Team(
-                $row['name'],
-                $row['nbPlayers'],
-                $row['descr'],
-                $row['sport'],
-                $row['id']
-            );
-        }
-        return null;
-    }
-
-    public function updateTeam(Team $team)
-    {
-        $sql = "UPDATE teams SET name = ?, nbPlayers = ?, descr = ?, sport = ? WHERE id = ?";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([
+        $stmt = $this->pdo->prepare("UPDATE teams SET name = ?, nbPlayers = ?, descr = ?, sport = ? WHERE id = ?");
+        return $stmt->execute([
             $team->getName(),
             $team->getNbPlayers(),
             $team->getDescr(),
             $team->getSport(),
-            $team->getId()
+            $id
         ]);
     }
 
-    public function deleteTeam($id)
+    public function deleteTeam(int $id): bool
     {
         $stmt = $this->pdo->prepare("DELETE FROM teams WHERE id = ?");
-        $stmt->execute([$id]);
+        return $stmt->execute([$id]);
     }
 }

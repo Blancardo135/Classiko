@@ -1,53 +1,110 @@
 <?php
 require_once __DIR__ . '/../src/TeamsManager.php';
+require_once __DIR__ . '/../src/PlayersManager.php';
 
-$manager = new TeamsManager();
-$teams = $manager->getAllTeams();
+$teamsManager = new TeamsManager();
+$playersManager = new PlayersManager();
+
+$teams = $teamsManager->getAllTeams();
+$players = $playersManager->getAllPlayers();
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Gestionnaire d'équipes</title>
-    <link rel="stylesheet" href="style.css"> <!-- si tu en as un -->
+    <title>Accueil</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2rem; }
+        h1 { margin-bottom: 1rem; }
+        table { border-collapse: collapse; width: 100%; margin-bottom: 2rem; }
+        th, td { border: 1px solid #ccc; padding: 0.5rem; text-align: left; }
+        th { background-color: #f2f2f2; }
+        a.button {
+            background-color: #4CAF50; color: white;
+            padding: 0.5rem 1rem; text-decoration: none;
+            border-radius: 4px;
+        }
+        .section { margin-bottom: 3rem; }
+    </style>
 </head>
 <body>
-    <h1>⚽ Gestionnaire d'équipes et de joueurs</h1>
 
-    <section>
-        <h2>🏆 Mes équipes</h2>
+    <h1>Gestion des Équipes & Joueurs</h1>
 
-        <a class="btn" href="createTeam.php">➕ Créer une nouvelle équipe</a>
+    <div class="section">
+        <h2>Équipes</h2>
+        <a href="createTeam.php" class="button">➕ Ajouter une équipe</a>
 
-        <?php if (empty($teams)): ?>
-            <div class="empty">
-                <p>Aucune équipe enregistrée pour le moment.</p>
-            </div>
-        <?php else: ?>
-            <?php foreach ($teams as $team): ?>
-                <div class="team-card">
-                    <h3 style="color: green;"><?= htmlspecialchars($team->getName()) ?></h3>
-                    <p><strong>Sport :</strong> <?= htmlspecialchars($team->getSport()) ?></p>
-                    <p><strong>Nombre de joueurs :</strong> <?= htmlspecialchars($team->getNbPlayers()) ?></p>
-                    <?php if (!empty($team->getDescr())): ?>
-                        <p><strong>Description :</strong> <?= htmlspecialchars($team->getDescr()) ?></p>
-                    <?php endif; ?>
-                    <p>
-                        <a href="editTeam.php?id=<?= $team->getId() ?>">✏️ Modifier</a> |
-                        <a href="deleteTeam.php?id=<?= $team->getId() ?>" onclick="return confirm('Supprimer cette équipe ?')">🗑️ Supprimer</a>
-                    </p>
-                </div>
-            <?php endforeach; ?>
-        <?php endif; ?>
-    </section>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Pays</th>
+                    <th>Ville</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (empty($teams)): ?>
+                    <tr><td colspan="5">Aucune équipe trouvée.</td></tr>
+                <?php else: ?>
+                    <?php foreach ($teams as $team): ?>
+                        <tr>
+                            <td><?= $team->getId(); ?></td>
+                            <td><?= htmlspecialchars($team->getName()); ?></td>
+                            <td><?= htmlspecialchars($team->getCountry()); ?></td>
+                            <td><?= htmlspecialchars($team->getCity()); ?></td>
+                            <td><a href="editTeam.php?id=<?= $team->getId(); ?>">Modifier</a></td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
 
-    <section>
-        <h2>👥 Mes joueurs</h2>
-        <div class="empty">
-            <p>Aucun joueur enregistré.</p>
-            <a class="btn" href="createPlayer.php">Ajouter un joueur</a>
-        </div>
-    </section>
+    <div class="section">
+        <h2>Joueurs</h2>
+        <a href="createPlayer.php" class="button">➕ Ajouter un joueur</a>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Club</th>
+                    <th>Pays</th>
+                    <th>Position</th>
+                    <th>Équipe</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (empty($players)): ?>
+                    <tr><td colspan="8">Aucun joueur trouvé.</td></tr>
+                <?php else: ?>
+                    <?php foreach ($players as $player): ?>
+                        <?php
+                            $team = $teamsManager->getTeam($player->getTeamId());
+                            $teamName = $team ? htmlspecialchars($team->getName()) : 'Équipe inconnue';
+                        ?>
+                        <tr>
+                            <td><?= $player->getId(); ?></td>
+                            <td><?= htmlspecialchars($player->getFirstname()); ?></td>
+                            <td><?= htmlspecialchars($player->getLastname()); ?></td>
+                            <td><?= htmlspecialchars($player->getClub()); ?></td>
+                            <td><?= htmlspecialchars($player->getCountry()); ?></td>
+                            <td><?= htmlspecialchars($player->getPosition()); ?></td>
+                            <td><?= $teamName; ?></td>
+                            <td><a href="editPlayer.php?id=<?= $player->getId(); ?>">Modifier</a></td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
+
 </body>
 </html>
