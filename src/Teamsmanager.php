@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ . '/Team.php';
-require_once __DIR__ . '/Database.php';
 
 class TeamsManager
 {
@@ -8,9 +7,21 @@ class TeamsManager
 
     public function __construct()
     {
-        // On se connecte à la base SQLite via la classe Database
-        $db = new Database();
-        $this->pdo = $db->getPdo();
+        $host = 'b35v6r.myd.infomaniak.com';
+        $port = 3306;
+        $db   = 'b35v6r_classiko';
+        $user = 'b35v6r_ropira';
+        $pass = 'Ropira113013.';
+        $charset = 'utf8mb4';
+
+        $dsn = "mysql:host=$host;port=$port;dbname=$db;charset=$charset";
+
+        $options = [
+            PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        ];
+
+        $this->pdo = new PDO($dsn, $user, $pass, $options);
     }
 
     public function addTeam(Team $team)
@@ -32,7 +43,13 @@ class TeamsManager
         $teams = [];
 
         while ($row = $stmt->fetch()) {
-            $teams[] = new Team($row['name'], $row['nbPlayers'], $row['descr'], $row['sport']);
+            $teams[] = new Team(
+                $row['name'],
+                $row['nbPlayers'],
+                $row['descr'],
+                $row['sport'],
+                $row['id']
+            );
         }
 
         return $teams;
@@ -45,9 +62,33 @@ class TeamsManager
         $row = $stmt->fetch();
 
         if ($row) {
-            return new Team($row['name'], $row['nbPlayers'], $row['descr'], $row['sport']);
+            return new Team(
+                $row['name'],
+                $row['nbPlayers'],
+                $row['descr'],
+                $row['sport'],
+                $row['id']
+            );
         }
-
         return null;
+    }
+
+    public function updateTeam(Team $team)
+    {
+        $sql = "UPDATE teams SET name = ?, nbPlayers = ?, descr = ?, sport = ? WHERE id = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            $team->getName(),
+            $team->getNbPlayers(),
+            $team->getDescr(),
+            $team->getSport(),
+            $team->getId()
+        ]);
+    }
+
+    public function deleteTeam($id)
+    {
+        $stmt = $this->pdo->prepare("DELETE FROM teams WHERE id = ?");
+        $stmt->execute([$id]);
     }
 }
