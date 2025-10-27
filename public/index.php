@@ -7,7 +7,7 @@ $teamsManager = new TeamsManager();
 $playersManager = new PlayersManager();
 
 // Méthodes corrigées pour correspondre à ta classe TeamsManager
-$teams = $teamsManager->getTeams();
+$teams = $teamsManager->getAllTeams();
 $players = $playersManager->getPlayers();
 ?>
 
