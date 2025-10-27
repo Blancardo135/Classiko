@@ -1,77 +1,30 @@
 <?php
 require_once __DIR__ . '/Database.php';
+require_once __DIR__ . '/Player.php';
 
 class PlayersManager
 {
-    private $pdo;
+    private $database;
 
     public function __construct()
     {
-        $db = new Database();
-        $this->pdo = $db->getPdo();
+        $this->database = new Database();
     }
 
-    // 🔹 Récupérer tous les joueurs
-    public function getAllPlayers(): array
+    public function getPlayers()
     {
-        $stmt = $this->pdo->query("SELECT * FROM players ORDER BY lastname ASC");
+        $sql = "SELECT * FROM players";
+        $stmt = $this->database->getPdo()->prepare($sql);
+        $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // 🔹 Récupérer un joueur par ID
-    public function getPlayerById(int $id): ?array
+    public function getPlayer($id)
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM players WHERE id = :id");
-        $stmt->execute(['id' => $id]);
-        $player = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $player ?: null;
-    }
-
-    // 🔹 Ajouter un nouveau joueur
-    public function addPlayer(string $firstname, string $lastname, ?string $country, ?string $club, ?string $position, ?int $team_id): bool
-    {
-        $stmt = $this->pdo->prepare("
-            INSERT INTO players (firstname, lastname, country, club, position, team_id)
-            VALUES (:firstname, :lastname, :country, :club, :position, :team_id)
-        ");
-        return $stmt->execute([
-            'firstname' => $firstname,
-            'lastname' => $lastname,
-            'country' => $country,
-            'club' => $club,
-            'position' => $position,
-            'team_id' => $team_id
-        ]);
-    }
-
-    // 🔹 Modifier un joueur existant
-    public function updatePlayer(int $id, string $firstname, string $lastname, ?string $country, ?string $club, ?string $position, ?int $team_id): bool
-    {
-        $stmt = $this->pdo->prepare("
-            UPDATE players
-            SET firstname = :firstname,
-                lastname = :lastname,
-                country = :country,
-                club = :club,
-                position = :position,
-                team_id = :team_id
-            WHERE id = :id
-        ");
-        return $stmt->execute([
-            'id' => $id,
-            'firstname' => $firstname,
-            'lastname' => $lastname,
-            'country' => $country,
-            'club' => $club,
-            'position' => $position,
-            'team_id' => $team_id
-        ]);
-    }
-
-    // 🔹 Supprimer un joueur
-    public function deletePlayer(int $id): bool
-    {
-        $stmt = $this->pdo->prepare("DELETE FROM players WHERE id = :id");
-        return $stmt->execute(['id' => $id]);
+        $sql = "SELECT * FROM players WHERE id = :id";
+        $stmt = $this->database->getPdo()->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }

@@ -6,9 +6,9 @@ require_once __DIR__ . '/../src/PlayersManager.php';
 $teamsManager = new TeamsManager();
 $playersManager = new PlayersManager();
 
-// Récupération de toutes les équipes et joueurs
-$teams = $teamsManager->getAllTeams();
-$players = $playersManager->getAllPlayers();
+// Méthodes corrigées pour correspondre à ta classe TeamsManager
+$teams = $teamsManager->getTeams();
+$players = $playersManager->getPlayers();
 ?>
 
 <!DOCTYPE html>
@@ -20,6 +20,7 @@ $players = $playersManager->getAllPlayers();
     <title>Gestionnaire d'équipes et de joueurs</title>
 
     <style>
+        /* CSS */
         * {
             margin: 0;
             padding: 0;
@@ -174,34 +175,12 @@ $players = $playersManager->getAllPlayers();
             color: #999;
         }
 
-        .empty-state p {
-            margin-bottom: 15px;
-            font-size: 16px;
-        }
-
         footer {
             text-align: center;
             margin-top: 50px;
             padding-top: 20px;
             border-top: 1px solid #ddd;
             color: #666;
-        }
-
-        @media (max-width: 768px) {
-            .main-actions {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .section-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-
-            .grid {
-                grid-template-columns: 1fr;
-            }
         }
     </style>
 </head>
@@ -213,12 +192,8 @@ $players = $playersManager->getAllPlayers();
     </header>
 
     <div class="main-actions">
-        <a href="createTeam.php">
-            <button class="btn">➕ Créer une nouvelle équipe</button>
-        </a>
-        <a href="createPlayer.php">
-            <button class="btn btn-secondary">➕ Ajouter un nouveau joueur</button>
-        </a>
+        <a href="createTeam.php"><button class="btn">➕ Créer une nouvelle équipe</button></a>
+        <a href="createPlayer.php"><button class="btn btn-secondary">➕ Ajouter un nouveau joueur</button></a>
     </div>
 
     <!-- Section Équipes -->
@@ -231,30 +206,21 @@ $players = $playersManager->getAllPlayers();
         <?php if (empty($teams)): ?>
             <div class="empty-state">
                 <p>Aucune équipe enregistrée pour le moment</p>
-                <a href="createTeam.php">
-                    <button class="btn">Créer ma première équipe</button>
-                </a>
+                <a href="createTeam.php"><button class="btn">Créer ma première équipe</button></a>
             </div>
         <?php else: ?>
             <div class="grid">
                 <?php foreach ($teams as $team): ?>
                     <div class="card">
                         <h3><?= htmlspecialchars($team['name']) ?></h3>
-                        <div class="card-info">
-                            <strong>Sport:</strong> <?= htmlspecialchars($team['sport']) ?>
-                        </div>
-                        <div class="card-info">
-                            <strong>Nombre de joueurs:</strong> <?= htmlspecialchars($team['nbPlayers']) ?>
-                        </div>
+                        <div class="card-info"><strong>Sport:</strong> <?= htmlspecialchars($team['sport']) ?></div>
+                        <div class="card-info"><strong>Nombre de joueurs:</strong> <?= htmlspecialchars($team['nbPlayers']) ?></div>
                         <?php if (!empty($team['descr'])): ?>
                             <div class="card-info">
-                                <strong>Description:</strong> <?= htmlspecialchars(substr($team['descr'], 0, 100)) ?><?= strlen($team['descr']) > 100 ? '...' : '' ?>
+                                <strong>Description:</strong>
+                                <?= htmlspecialchars(substr($team['descr'], 0, 100)) ?><?= strlen($team['descr']) > 100 ? '...' : '' ?>
                             </div>
                         <?php endif; ?>
-                        <div class="card-actions">
-                            <a href="viewTeam.php?id=<?= $team['id'] ?>" class="btn-view">👁️ Voir</a>
-                            <a href="editTeam.php?id=<?= $team['id'] ?>" class="btn-edit">✏️ Modifier</a>
-                        </div>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -271,30 +237,18 @@ $players = $playersManager->getAllPlayers();
         <?php if (empty($players)): ?>
             <div class="empty-state">
                 <p>Aucun joueur enregistré pour le moment</p>
-                <a href="createPlayer.php">
-                    <button class="btn btn-secondary">Ajouter mon premier joueur</button>
-                </a>
+                <a href="createPlayer.php"><button class="btn btn-secondary">Ajouter mon premier joueur</button></a>
             </div>
         <?php else: ?>
             <div class="grid">
                 <?php foreach ($players as $player): ?>
                     <div class="card">
                         <h3><?= htmlspecialchars($player['name']) ?> <?= htmlspecialchars($player['surname']) ?></h3>
-                        <div class="card-info">
-                            <strong>Position:</strong> <?= htmlspecialchars($player['position']) ?>
-                        </div>
-                        <div class="card-info">
-                            <strong>Club:</strong> <?= htmlspecialchars($player['club']) ?>
-                        </div>
+                        <div class="card-info"><strong>Position:</strong> <?= htmlspecialchars($player['position']) ?></div>
+                        <div class="card-info"><strong>Club:</strong> <?= htmlspecialchars($player['club']) ?></div>
                         <?php if (!empty($player['country'])): ?>
-                            <div class="card-info">
-                                <strong>Pays:</strong> <?= htmlspecialchars($player['country']) ?>
-                            </div>
+                            <div class="card-info"><strong>Pays:</strong> <?= htmlspecialchars($player['country']) ?></div>
                         <?php endif; ?>
-                        <div class="card-actions">
-                            <a href="viewPlayer.php?id=<?= $player['id'] ?>" class="btn-view">👁️ Voir</a>
-                            <a href="editPlayer.php?id=<?= $player['id'] ?>" class="btn-edit">✏️ Modifier</a>
-                        </div>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -305,5 +259,4 @@ $players = $playersManager->getAllPlayers();
         <p>Gestionnaire d'équipes et de joueurs - 2025</p>
     </footer>
 </body>
-
 </html>
