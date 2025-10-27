@@ -1,7 +1,7 @@
 <?php
 // Page d'accueil - Gestionnaire d'équipes et de joueurs
-require_once '../src/TeamsManager.php';
-require_once '../src/PlayersManager.php';
+require_once __DIR__ . '/../src/TeamsManager.php';
+require_once __DIR__ . '/../src/PlayersManager.php';
 
 $teamsManager = new TeamsManager();
 $playersManager = new PlayersManager();
