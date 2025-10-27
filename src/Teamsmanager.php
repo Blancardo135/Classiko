@@ -8,7 +8,7 @@ class TeamsManager
     public function __construct()
     {
         $host = 'b35v6r.myd.infomaniak.com';
-        $port = 3306; // optionnel mais explicite
+        $port = 3306;
         $db   = 'b35v6r_classiko';
         $user = 'b35v6r_ropira';
         $pass = 'Ropira113013.';
