@@ -7,8 +7,8 @@ class TeamsManager {
     public function __construct() {
         $host = 'localhost';
         $db   = 'classiko_db';
-        $user = 'ton_user';
-        $pass = 'ton_mdp';
+        $user = 'b35v6r_ropira';
+        $pass = 'Ropira113013.';
         $charset = 'utf8mb4';
 
         $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
