@@ -1,18 +1,21 @@
 <?php
 require_once __DIR__ . '/Team.php';
 
-class TeamsManager {
+class TeamsManager
+{
     private $pdo;
 
-    public function __construct() {
-        // 🔧 Configuration pour Infomaniak
-        $host = '127.0.0.1'; // ← crucial : ne pas utiliser 'localhost'
-        $db   = 'classiko_db'; // ← nom de ta base
-        $user = 'b35v6r_ropira'; // ← utilisateur
-        $pass = 'Ropira113013.'; // ← mot de passe
+    public function __construct()
+    {
+        $host = 'b35v6r.myd.infomaniak.com';
+        $port = 3306; // optionnel mais explicite
+        $db   = 'b35v6r_classiko';
+        $user = 'b35v6r_ropira';
+        $pass = 'Ropira113013.';
         $charset = 'utf8mb4';
 
-        $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+        $dsn = "mysql:host=$host;port=$port;dbname=$db;charset=$charset";
+
         $options = [
             PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
@@ -21,7 +24,9 @@ class TeamsManager {
         $this->pdo = new PDO($dsn, $user, $pass, $options);
     }
 
-    public function addTeam(Team $team) {
+
+    public function addTeam(Team $team)
+    {
         $sql = "INSERT INTO teams (name, nbPlayers, descr, sport) VALUES (?, ?, ?, ?)";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([
@@ -33,7 +38,8 @@ class TeamsManager {
         return $this->pdo->lastInsertId();
     }
 
-    public function getAllTeams() {
+    public function getAllTeams()
+    {
         $stmt = $this->pdo->query("SELECT * FROM teams");
         $teams = [];
 
