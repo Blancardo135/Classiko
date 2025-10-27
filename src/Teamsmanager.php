@@ -1,30 +1,45 @@
 <?php
-require_once __DIR__ . '/Database.php';
 require_once __DIR__ . '/Team.php';
 
-class TeamsManager
-{
-    private $database;
+class TeamsManager {
+    private $pdo;
 
-    public function __construct()
-    {
-        $this->database = new Database();
+    public function __construct() {
+        $host = 'localhost';
+        $db   = 'classiko_db';
+        $user = 'ton_user';
+        $pass = 'ton_mdp';
+        $charset = 'utf8mb4';
+
+        $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+        $options = [
+            PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        ];
+
+        $this->pdo = new PDO($dsn, $user, $pass, $options);
     }
 
-    public function getTeams()
-    {
-        $sql = "SELECT * FROM teams";
-        $stmt = $this->database->getPdo()->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    public function addTeam(Team $team) {
+        $sql = "INSERT INTO teams (name, nbPlayers, descr, sport) VALUES (?, ?, ?, ?)";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            $team->getName(),
+            $team->getNbPlayers(),
+            $team->getDescr(),
+            $team->getSport()
+        ]);
+        return $this->pdo->lastInsertId();
     }
 
-    public function getTeam($id)
-    {
-        $sql = "SELECT * FROM teams WHERE id = :id";
-        $stmt = $this->database->getPdo()->prepare($sql);
-        $stmt->bindValue(':id', $id);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+    public function getAllTeams() {
+        $stmt = $this->pdo->query("SELECT * FROM teams");
+        $teams = [];
+
+        while ($row = $stmt->fetch()) {
+            $teams[] = new Team($row['name'], $row['nbPlayers'], $row['descr'], $row['sport']);
+        }
+
+        return $teams;
     }
 }
