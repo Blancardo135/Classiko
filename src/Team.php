@@ -7,12 +7,7 @@ class Team {
     private $descr;
     private $sport;
 
-    public function __construct(
-        $name,
-        $nbPlayers,
-        $descr,
-        $sport,
-    ) {
+    public function __construct($name, $nbPlayers, $descr, $sport) {
         $this->name = $name;
         $this->nbPlayers = $nbPlayers;
         $this->descr = $descr;
@@ -45,35 +40,15 @@ class Team {
         return $errors;
     }
 
-    public function getName() {
-        return $this->name;
-    }
+    public function getName() { return $this->name; }
+    public function setName($name) { $this->name = $name; }
 
-    public function setName($name) {
-        $this->name = $name;
-    }
+    public function getNbPlayers() { return $this->nbPlayers; }
+    public function setNbPlayers($nbPlayers) { $this->nbPlayers = $nbPlayers; }
 
-    public function getNbPlayers() {
-        return $this->nbPlayers;
-    }
+    public function getDescr() { return $this->descr; }
+    public function setDescr($descr) { $this->descr = $descr; }
 
-    public function setNbPlayers($nbPlayers) {
-        $this->nbPlayers = $nbPlayers;
-    }
-
-    public function getDescr() {
-        return $this->descr;
-    }
-
-    public function setDescr($descr) {
-        $this->descr = $descr;
-    }
-
-    public function getSport() {
-        return $this->sport;
-    }
-
-    public function setSport($sport) {
-        $this->sport = $sport;
-    }
+    public function getSport() { return $this->sport; }
+    public function setSport($sport) { $this->sport = $sport; }
 }
