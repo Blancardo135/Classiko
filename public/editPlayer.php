@@ -196,7 +196,7 @@ if (isset($_GET["id"])) {
         <?php } ?>
     <?php } ?>
 
-    <form action="createPlayer.php" method ="POST">
+    <form action="editPlayer.php" method ="POST">
         
         <label for="name">Prénom :</label><br>
         <input type="text" id="name" name="name" value="<?php if (isset($name)) echo htmlspecialchars($name); ?>" minlength="2" maxlength="40">
@@ -219,7 +219,7 @@ if (isset($_GET["id"])) {
         <br>
 
         <label for="position">Position :</label><br>
-        <input type="texte" id="position" name="position" value="<?php if (isset($position)) echo htmlspecialchars($position); ?>" required>
+        <input type="text" id="position" name="position" value="<?php if (isset($position)) echo htmlspecialchars($position); ?>" required>
 
         <br>
         

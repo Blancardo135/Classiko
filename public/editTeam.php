@@ -39,7 +39,7 @@ if (isset($_GET["id"])) {
         $name,
         $nbPlayers,
         $descr,
-        $sport,
+        $sport
     );
 
     // On valide les données

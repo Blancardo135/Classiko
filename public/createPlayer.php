@@ -1,6 +1,6 @@
 <?php
 //Page qui permet de créer son équipe
-require_once '../src/Teamsmanager.php';
+require_once '../src/Playersmanager.php';
 $playersManager = new PlayersManager();
 
 if($_SERVER["REQUEST_METHOD"]== "POST"){
@@ -165,7 +165,7 @@ if(empty($errors)){
         <br>
 
         <label for="position">Position :</label><br>
-        <input type="texte" id="position" name="position" value="<?php if (isset($position)) echo htmlspecialchars($position); ?>" required>
+        <input type="text" id="position" name="position" value="<?php if (isset($position)) echo htmlspecialchars($position); ?>" required>
 
         <br>
 
