@@ -1,7 +1,7 @@
 <?php
 //testdb
-require_once __DIR__ . '/../src/Database.php';
-
+require_once __DIR__ . '/../src/TeamsManager.php';
+require_once __DIR__ . '/../src/PlayersManager.php';
 // On crée une instance => ça exécute ton constructeur + la création de tables
 $db = new Database();
 

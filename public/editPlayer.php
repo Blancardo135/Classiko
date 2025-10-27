@@ -1,6 +1,6 @@
 <?php
-//permet d'éditer un joueur
-require '../src/PlayersManager.php';
+require_once __DIR__ . '/../src/TeamsManager.php';
+require_once __DIR__ . '/../src/PlayersManager.php';
 
 $playersManager = new PlayersManager();
 

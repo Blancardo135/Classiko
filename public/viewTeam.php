@@ -1,7 +1,7 @@
 <?php
 //view team 
-require '../src/TeamsManager.php';
-
+require_once __DIR__ . '/../src/TeamsManager.php';
+require_once __DIR__ . '/../src/PlayersManager.php';
 $teamsManager = new TeamsManager();
 
 // On vérifie si l'ID de l'animal est passé dans l'URL

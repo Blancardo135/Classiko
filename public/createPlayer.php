@@ -1,6 +1,7 @@
 <?php
 //Page qui permet de créer son équipe
-require_once '../src/Playersmanager.php';
+require_once __DIR__ . '/../src/TeamsManager.php';
+require_once __DIR__ . '/../src/PlayersManager.php';
 $playersManager = new PlayersManager();
 
 if($_SERVER["REQUEST_METHOD"]== "POST"){
