@@ -27,42 +27,4 @@ class TeamsManager
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-
-    public function addTeam($team)
-    {
-        $sql = "INSERT INTO teams (name, nbPlayers, descr, sport)
-                VALUES (:name, :nbPlayers, :descr, :sport)";
-        $stmt = $this->database->getPdo()->prepare($sql);
-        $stmt->bindValue(':name', $team->getName());
-        $stmt->bindValue(':nbPlayers', $team->getNbPlayers());
-        $stmt->bindValue(':descr', $team->getDescr());
-        $stmt->bindValue(':sport', $team->getSport());
-        $stmt->execute();
-        return $this->database->getPdo()->lastInsertId();
-    }
-
-    public function updateTeam($id, $team)
-    {
-        $sql = "UPDATE teams SET
-                    name = :name,
-                    nbPlayers = :nbPlayers,
-                    descr = :descr,
-                    sport = :sport
-                WHERE id = :id"; 
-        $stmt = $this->database->getPdo()->prepare($sql);
-        $stmt->bindValue(':id', $id);
-        $stmt->bindValue(':name', $team->getName());
-        $stmt->bindValue(':nbPlayers', $team->getNbPlayers());
-        $stmt->bindValue(':descr', $team->getDescr());
-        $stmt->bindValue(':sport', $team->getSport());
-        return $stmt->execute();
-    }
-
-    public function removeTeam($id)
-    {
-        $sql = "DELETE FROM teams WHERE id = :id";
-        $stmt = $this->database->getPdo()->prepare($sql);
-        $stmt->bindValue(':id', $id);
-        return $stmt->execute();
-    }
 }
