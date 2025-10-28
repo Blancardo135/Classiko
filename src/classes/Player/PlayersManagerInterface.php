@@ -1,6 +1,6 @@
 <?php
 
-namespace Players;
+namespace Player;
 
 interface PlayersManagerInterface {
     public function getPlayers(): array;

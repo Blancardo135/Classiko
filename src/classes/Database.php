@@ -1,8 +1,7 @@
 <?php
-// src/Database.php
 
-class Database
-{
+
+class Database{
     private static ?Database $instance = null;
     private PDO $pdo;
 
