@@ -143,6 +143,10 @@ class Player implements PlayerInterface {
 
         $this->position = $position;
     }
+
+    public function setTeamId(int $team_id): void {
+        $this->team_id = $team_id;
+    }
 }
 
 // class Player
