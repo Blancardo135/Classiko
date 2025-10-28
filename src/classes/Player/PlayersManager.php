@@ -7,7 +7,7 @@ require_once __DIR__ . '/../../utils/autoloader.php';
 
 use Database;
 
-class ToolsManager implements PlayersManagerInterface {
+class PlayersManager implements PlayersManagerInterface {
     private $database;
 
     public function __construct() {
@@ -44,7 +44,7 @@ class ToolsManager implements PlayersManagerInterface {
         return $players;
     }
 
-    public function addTool(Player $player): int {
+    public function addPlayer(Player $player): int {
         // Définition de la requête SQL pour ajouter un joueur
         $sql = "INSERT INTO players (firstname, lastname, country, club, position) VALUES (:firstname, :lastname, :country, :club, :position)";
 
