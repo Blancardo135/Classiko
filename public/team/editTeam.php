@@ -1,62 +1,117 @@
 <?php
-require_once __DIR__ . '/../src/TeamsManager.php';
-require_once __DIR__ . '/../src/Team.php';
+require_once __DIR__ . '/../../src/utils/autoloader.php';
 
+use Teams\TeamsManager;
+use Teams\Team;
+
+// Création d'une instance de TeamsManager
 $teamsManager = new TeamsManager();
-$teamId = (int) ($_GET['id'] ?? 0);
-$team = $teamsManager->getTeam($teamId);
 
-if (!$team) {
-    echo "Équipe non trouvée.";
-    exit;
+// Récupération de l'équipe à modifier si l'ID est passé en GET
+if (isset($_GET["id"])) {
+    $teamId = $_GET["id"];
+    $team = $teamsManager->getTeamById($teamId);
+
+    if (!$team) {
+        die("Équipe non trouvée.");
+    }
+} else {
+    // Redirection si aucun ID
+    header("Location: index.php");
+    exit();
 }
 
-$errors = [];
+// Gère la soumission du formulaire
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    // Récupération des données du formulaire
+    $name = $_POST["name"];
+    $nbPlayers = $_POST["nbPlayers"];
+    $descr = $_POST["descr"];
+    $sport = $_POST["sport"];
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $team = new Team($_POST['name'], $_POST['nbPlayers'], $_POST['descr'], $_POST['sport'], $teamId);
-    $errors = $team->validate();
+    $errors = [];
 
+    try {
+        // Création d’un objet Team avec les nouvelles valeurs
+        $updatedTeam = new Team(
+            $teamId,
+            $name,
+            (int) $nbPlayers,
+            $descr,
+            $sport
+        );
+    } catch (InvalidArgumentException $e) {
+        $errors[] = $e->getMessage();
+    }
+
+    // S’il n’y a pas d’erreurs, on met à jour
     if (empty($errors)) {
-        $teamsManager->updateTeam($teamId, $team);
-        header("Location: viewTeam.php?id=$teamId");
-        exit;
+        try {
+            $teamsManager->updateTeam($updatedTeam);
+
+            // Redirection vers la page d’accueil
+            header("Location: index.php");
+            exit();
+        } catch (PDOException $e) {
+            if ($e->getCode() === "23000") {
+                $errors[] = "Ce nom d’équipe existe déjà.";
+            } else {
+                $errors[] = "Erreur base de données : " . $e->getMessage();
+            }
+        } catch (Exception $e) {
+            $errors[] = "Erreur inattendue : " . $e->getMessage();
+        }
     }
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="fr">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>Modifier l’équipe</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <title>Modifier l’équipe | MyApp</title>
 </head>
+
 <body>
-    <h1>Modifier l’équipe</h1>
-    <a href="index.php">⬅️ Retour à la liste</a>
+    <main class="container">
+        <h1>Modifier l’équipe</h1>
 
-    <?php foreach ($errors as $error): ?>
-        <p style="color:red"><?= htmlspecialchars($error) ?></p>
-    <?php endforeach; ?>
+        <p><a href="../index.php">Accueil</a> > <a href="index.php">Gestion des équipes</a> > Modification</p>
 
-    <form method="post">
-        <label>Nom de l'équipe :
-            <input type="text" name="name" required value="<?= htmlspecialchars($team->getName()) ?>">
-        </label><br>
+        <?php if ($_SERVER["REQUEST_METHOD"] === "POST") { ?>
+            <?php if (empty($errors)) { ?>
+                <p style="color: green;">L’équipe a été modifiée avec succès.</p>
+            <?php } else { ?>
+                <p style="color: red;">Le formulaire contient des erreurs :</p>
+                <ul>
+                    <?php foreach ($errors as $error) { ?>
+                        <li><?= htmlspecialchars($error) ?></li>
+                    <?php } ?>
+                </ul>
+            <?php } ?>
+        <?php } ?>
 
-        <label>Nombre de joueurs :
-            <input type="number" name="nbPlayers" required min="1" value="<?= $team->getNbPlayers() ?>">
-        </label><br>
+        <form action="editTeam.php?id=<?= htmlspecialchars($teamId) ?>" method="POST">
+            <label for="name">Nom de l’équipe</label>
+            <input type="text" id="name" name="name" value="<?= htmlspecialchars($team->getName() ?? '') ?>" required minlength="2">
 
-        <label>Description :
-            <textarea name="descr"><?= htmlspecialchars($team->getDescr()) ?></textarea>
-        </label><br>
+            <label for="nbPlayers">Nombre de joueurs</label>
+            <input type="number" id="nbPlayers" name="nbPlayers" value="<?= htmlspecialchars($team->getNbPlayers() ?? '') ?>" required min="1">
 
-        <label>Sport :
-            <input type="text" name="sport" required value="<?= htmlspecialchars($team->getSport()) ?>">
-        </label><br><br>
+            <label for="descr">Description</label>
+            <textarea id="descr" name="descr" required><?= htmlspecialchars($team->getDescr() ?? '') ?></textarea>
 
-        <button type="submit">💾 Enregistrer les modifications</button>
-    </form>
+            <label for="sport">Sport</label>
+            <input type="text" id="sport" name="sport" value="<?= htmlspecialchars($team->getSport() ?? '') ?>" required>
+
+            <button type="submit">Modifier</button>
+        </form>
+    </main>
 </body>
+
 </html>
