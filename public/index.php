@@ -8,17 +8,18 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
     <link rel="stylesheet" href="css/custom.css">
 
-    <title>Page d'accueil | MyApp</title>
+    <title>Accueil | Gestion des équipes</title>
 </head>
 
 <body>
     <main class="container">
-        <h1>Page d'accueil</h1>
+        <h1>Gestion des équipes</h1>
 
-        <p>Bienvenue sur la page d'accueil de MyApp.</p>
+        <p>Bienvenue dans l'application de gestion d’équipes.</p>
 
-
-        <p><a href="player/index.php"><button>Aller à la gestion des joueurs</button></a></p>
-        <p><a href="team/index.php"><button>Aller à la gestion des équipes</button></a></p>
+        <p><a href="team/index.php"><button>Voir les équipes</button></a></p>
+        <p><a href="player/index.php"><button>Voir les joueurs</button></a></p>
     </main>
 </body>
+
+</html>
