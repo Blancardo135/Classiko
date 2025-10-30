@@ -103,7 +103,7 @@ class PlayersManager implements PlayersManagerInterface
         return (int)$this->database->getPdo()->lastInsertId();
     }
 
-    public function deletePlayer(int $id): bool {
+    public function removePlayer(int $id): bool {
         $sql = "DELETE FROM players WHERE id = :id";
         $stmt = $this->database->getPdo()->prepare($sql);
         $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
