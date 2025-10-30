@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../../src/utils/autoloader.php';
 
 use Team\TeamsManager;
-use Teams\Team;
+use Team\Team;
 
 // Création d'une instance de TeamsManager
 $teamsManager = new TeamsManager();
