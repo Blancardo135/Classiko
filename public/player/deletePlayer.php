@@ -14,7 +14,7 @@ if (isset($_GET["id"])) {
     $playerId = $_GET["id"];
 
     // Suppression de l'outil correspondant à l'ID
-    $playersManager->deletePlayer($playerId);
+    $playersManager->removePlayer($playerId);
 
     header("Location: index.php");
     exit();
