@@ -3,8 +3,7 @@
 require_once __DIR__ . '/../../src/utils/autoloader.php';
 
 // Inclusion explicite des classes nécessaires (optionnelle si l'autoloader est bien configuré)
-require_once __DIR__ . '/../src/classes/Team/TeamsManager.php';
-require_once __DIR__ . '/../src/classes/Team/Team.php';
+
 
 use Team\TeamsManager;
 use Team\Team;
