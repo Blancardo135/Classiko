@@ -1,15 +1,13 @@
 <?php
 require_once __DIR__ . '/../../src/utils/autoloader.php';
-require_once __DIR__ . '/../src/classes/Player/PlayersManager.php';
-require_once __DIR__ . '/../src/classes/Player/Player.php';
-require_once __DIR__ . '/../src/classes/Team/TeamsManager.php';
 
 use Player\PlayersManager;
 use Player\Player;
+use Team\TeamsManager; 
 
 $playersManager = new PlayersManager();
 $teamsManager = new TeamsManager();
-$teams = $teamsManager->getAllTeams();
+$teams = $teamsManager->getTeams();
 
 $players = $playersManager->getPlayers();
 ?>
@@ -45,7 +43,8 @@ $players = $playersManager->getPlayers();
                     <th>Country</th>
                     <th>Club</th>
                     <th>Position</th>
-                    <th>team_id</th>
+                    <th>Équipe</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -56,7 +55,18 @@ $players = $playersManager->getPlayers();
                         <td><?= htmlspecialchars($player->getCountry()) ?></td>
                         <td><?= htmlspecialchars($player->getClub()) ?></td>
                         <td><?= htmlspecialchars($player->getPosition()) ?></td>
-                        <td><?= htmlspecialchars($player->getTeamId()) ?></td>  
+                         <td><!-- permet d'afficher le nom de l'équipe et pas simplement le numéro, plusjoli
+                            <?php 
+                            $team = null;
+                            foreach ($teams as $t) {
+                                if ($t->getId() === $player->getTeamId()) {
+                                    $team = $t;
+                                    break;
+                                }
+                            }
+                            echo htmlspecialchars($team ? $team->getName() : 'Aucune équipe');
+                            ?>
+                        </td> 
                         <td>
                             <a href="deletePlayer.php?id=<?= htmlspecialchars($player->getId()) ?>"><button>Supprimer</button></a>
                             <a href="editPlayer.php?id=<?= htmlspecialchars($player->getId()) ?>"><button>Modifier</button></a>
