@@ -35,7 +35,7 @@ $players = $playersManager->getPlayers();
 
         <h2>Liste des joueurs</h2>
 
-        <p><a href="create.php"><button>Créer un nouveau joueur</button></a></p>
+        <p><a href="createPlayer.php"><button>Créer un nouveau joueur</button></a></p>
 
         <table>
             <thead>

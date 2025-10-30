@@ -34,7 +34,7 @@ $teams = $teamsManager->getTeams(); // Récupération de toutes les équipes
 
         <h2>Liste des équipes</h2>
 
-        <p><a href="create.php"><button>Créer une nouvelle équipe</button></a></p>
+        <p><a href="createTeam.php"><button>Créer une nouvelle équipe</button></a></p>
 
         <table>
             <thead>
@@ -50,8 +50,8 @@ $teams = $teamsManager->getTeams(); // Récupération de toutes les équipes
                         <td><?= htmlspecialchars($team->getName()) ?></td>
                         <td><?= htmlspecialchars($team->getSport()) ?></td>
                         <td>
-                            <a href="edit.php?id=<?= htmlspecialchars($team->getId()) ?>"><button>Modifier</button></a>
-                            <a href="delete.php?id=<?= htmlspecialchars($team->getId()) ?>"><button>Supprimer</button></a>
+                            <a href="editTeam.php?id=<?= htmlspecialchars($team->getId()) ?>"><button>Modifier</button></a>
+                            <a href="deleteTeam.php?id=<?= htmlspecialchars($team->getId()) ?>"><button>Supprimer</button></a>
                         </td>
                     </tr>
                 <?php } ?>
