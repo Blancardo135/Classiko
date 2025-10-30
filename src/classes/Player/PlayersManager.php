@@ -1,15 +1,16 @@
 <?php
-// src/PlayersManager.php
 
 namespace Player;
 
 use Database;
 
-class PlayersManager implements PlayersManagerInterface {
+class PlayersManager implements PlayersManagerInterface
+{
     private $database;
 
-    public function __construct() {
-        $this->database = new Database();
+    public function __construct()
+    {
+        $this->database = Database::getInstance();
     }
 
     public function getPlayers(): array {
