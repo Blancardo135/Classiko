@@ -41,7 +41,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     try {
         // Crée un nouvel objet joueur avec les nouvelles valeurs
-        $updatedPlayer = new Player($firstname, $lastname, $country, $club, $position, $team_id);
+        $updatedPlayer = new Player(
+            $playerId,           
+            $firstname,
+            $lastname,
+            $country,
+            $club,
+            $position,
+            (int)$team_id       
+        );
         $updatedPlayer->setId($playerId); // garde l’ID existant
 
         // Met à jour le joueur dans la base
@@ -61,6 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -116,4 +125,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </form>
     </main>
 </body>
+
 </html>
