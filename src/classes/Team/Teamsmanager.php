@@ -2,8 +2,6 @@
 
 namespace Team;
 
-require_once __DIR__ . '/../../utils/autoloader.php';
-
 use Database;
 
 class TeamsManager implements TeamsManagerInterface

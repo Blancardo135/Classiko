@@ -3,8 +3,6 @@
 
 namespace Player;
 
-require_once __DIR__ . '/../../utils/autoloader.php';
-
 use Database;
 
 class PlayersManager implements PlayersManagerInterface {
