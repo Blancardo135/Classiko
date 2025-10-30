@@ -39,6 +39,51 @@ class PlayersManager implements PlayersManagerInterface
 
         return $players;
     }
+    public function getPlayerById(int $id): ?Player {
+        $sql = "SELECT * FROM players WHERE id = :id";
+        $stmt = $this->database->getPdo()->prepare($sql);
+        $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
+        $stmt->execute();
+
+        $playerData = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        if ($playerData) {
+            return new Player(
+                (int)$playerData['id'],
+                $playerData['firstname'],
+                $playerData['lastname'],
+                $playerData['country'],
+                $playerData['club'],
+                $playerData['position'],
+                (int)$playerData['team_id']
+            );
+        }
+
+        return null;
+    }
+
+    public function updatePlayer(Player $player): bool {
+        $sql = "UPDATE players 
+                SET firstname = :firstname,
+                    lastname = :lastname,
+                    country = :country,
+                    club = :club,
+                    position = :position,
+                    team_id = :team_id
+                WHERE id = :id";
+
+        $stmt = $this->database->getPdo()->prepare($sql);
+
+        $stmt->bindValue(':firstname', $player->getFirstName());
+        $stmt->bindValue(':lastname', $player->getLastName());
+        $stmt->bindValue(':country', $player->getCountry());
+        $stmt->bindValue(':club', $player->getClub());
+        $stmt->bindValue(':position', $player->getPosition());
+        $stmt->bindValue(':team_id', $player->getTeamId(), \PDO::PARAM_INT);
+        $stmt->bindValue(':id', $player->getId(), \PDO::PARAM_INT);
+
+        return $stmt->execute();
+    }
 
     public function addPlayer(Player $player): int {
         $sql = "INSERT INTO players (firstname, lastname, country, club, position, team_id)
@@ -58,7 +103,7 @@ class PlayersManager implements PlayersManagerInterface
         return (int)$this->database->getPdo()->lastInsertId();
     }
 
-    public function removePlayer(int $id): bool {
+    public function deletePlayer(int $id): bool {
         $sql = "DELETE FROM players WHERE id = :id";
         $stmt = $this->database->getPdo()->prepare($sql);
         $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
