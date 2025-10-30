@@ -10,6 +10,7 @@ interface PlayerInterface
     public function getCountry(): string;
     public function getPosition(): string;
     public function getTeamId(): int;
+    public function getClub(): string;
 
 
     public function setId(int $id): void;
@@ -18,4 +19,5 @@ interface PlayerInterface
     public function setCountry(string $country): void;
     public function setPosition(string $position): void;
     public function setTeamId(int $teamId): void;
+    public function setClub(string $club): void;
 }

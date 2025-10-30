@@ -15,75 +15,57 @@ class PlayersManager implements PlayersManagerInterface {
     }
 
     public function getPlayers(): array {
-        // Définition de la requête SQL pour récupérer tous les outils
+        // Requête SQL pour récupérer tous les joueurs
         $sql = "SELECT * FROM players";
 
-        // Préparation de la requête SQL
+        // Préparation de la requête
         $stmt = $this->database->getPdo()->prepare($sql);
-
-        // Exécution de la requête SQL
         $stmt->execute();
 
-        // Récupération de tous les outils
-        $players = $stmt->fetchAll();
+        // Récupération des résultats
+        $playersData = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
-        // Transformation des tableaux associatifs en objets Tool
+        // Transformation des tableaux associatifs en objets Player
         $players = array_map(function ($playerData) {
             return new Player(
-                $playerData['id'],
+                (int)$playerData['id'],
                 $playerData['firstname'],
                 $playerData['lastname'],
                 $playerData['country'],
                 $playerData['club'],
                 $playerData['position'],
-                $playerData['team_id'],
+                (int)$playerData['team_id']
             );
-        }, $players);
+        }, $playersData);
 
-        // Retour de tous les outils
         return $players;
     }
 
     public function addPlayer(Player $player): int {
-        // Définition de la requête SQL pour ajouter un joueur
-        $sql = "INSERT INTO players (firstname, lastname, country, club, position) VALUES (:firstname, :lastname, :country, :club, :position)";
-
-        // Préparation de la requête SQL
+        $sql = "INSERT INTO players (firstname, lastname, country, club, position, team_id)
+                VALUES (:firstname, :lastname, :country, :club, :position, :team_id)";
+        
         $stmt = $this->database->getPdo()->prepare($sql);
 
-        // Lien avec les paramètres
         $stmt->bindValue(':firstname', $player->getFirstName());
         $stmt->bindValue(':lastname', $player->getLastName());
         $stmt->bindValue(':country', $player->getCountry());
         $stmt->bindValue(':club', $player->getClub());
         $stmt->bindValue(':position', $player->getPosition());
-        $stmt->bindValue(':team_id', $player->getTeamId());
+        $stmt->bindValue(':team_id', $player->getTeamId(), \PDO::PARAM_INT);
 
-        // Exécution de la requête SQL pour ajouter un outil
         $stmt->execute();
 
-        // Récupération de l'identifiant de l'outil ajouté
-        $playerId = $this->database->getPdo()->lastInsertId();
-
-        // Retour de l'identifiant de l'outil ajouté.
-        return $playerId;
+        return (int)$this->database->getPdo()->lastInsertId();
     }
 
     public function removePlayer(int $id): bool {
-        // Définition de la requête SQL pour supprimer un outil
-        $sql = "DELETE FROM tools WHERE id = :id";
-
-        // Préparation de la requête SQL
+        $sql = "DELETE FROM players WHERE id = :id";
         $stmt = $this->database->getPdo()->prepare($sql);
-
-        // Lien avec le paramètre
-        $stmt->bindValue(':id', $id);
-
-        // Exécution de la requête SQL pour supprimer un outil
+        $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
         return $stmt->execute();
     }
 }
-
 // require_once __DIR__ . '/Database.php';
 // require_once __DIR__ . '/Player.php';
 

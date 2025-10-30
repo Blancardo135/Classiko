@@ -6,7 +6,8 @@ require_once __DIR__ . '/../../utils/autoloader.php';
 
 use Database;
 
-class TeamsManager implements TeamsManagerInterface{
+class TeamsManager implements TeamsManagerInterface
+{
     private $database;
 
     public function __construct()
@@ -22,10 +23,11 @@ class TeamsManager implements TeamsManagerInterface{
     {
         $sql = "SELECT * FROM teams";
 
+        // ✅ Correction : il manquait la préparation et l’exécution
         $stmt = $this->database->getPdo()->prepare($sql);
         $stmt->execute();
 
-        $teams = $stmt->fetchAll();
+        $teams = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
         $teams = array_map(function ($teamData) {
             return new Team(
@@ -40,7 +42,6 @@ class TeamsManager implements TeamsManagerInterface{
         return $teams;
     }
 
-    
     public function getTeamById(int $id): ?Team
     {
         $sql = "SELECT * FROM teams WHERE id = :id";
@@ -63,7 +64,6 @@ class TeamsManager implements TeamsManagerInterface{
         return null;
     }
 
-   
     public function addTeam(Team $team): int
     {
         $sql = "INSERT INTO teams (name, nbPlayers, descr, sport)
@@ -81,7 +81,6 @@ class TeamsManager implements TeamsManagerInterface{
         return (int)$this->database->getPdo()->lastInsertId();
     }
 
-    
     public function updateTeam(Team $team): bool
     {
         $sql = "UPDATE teams 
@@ -102,7 +101,6 @@ class TeamsManager implements TeamsManagerInterface{
         return $stmt->execute();
     }
 
-    
     public function removeTeam(int $id): bool
     {
         $sql = "DELETE FROM teams WHERE id = :id";

@@ -10,7 +10,7 @@ class Team implements TeamInterface{
     private string $sport;
 
    
-    public function __construct(int $id, string $name, int $nbPlayers, string $descr, string $sport)
+    public function __construct(?int $id, string $name, int $nbPlayers, string $descr, string $sport) 
     {
         if (empty($name)) {
             throw new \InvalidArgumentException("Le nom de l’équipe est requis.");
@@ -68,8 +68,8 @@ class Team implements TeamInterface{
 
     public function setId(int $id): void
     {
-        $this->id = $id;
-    }
+        $this->id = $id ?? 0;
+        }
 
     public function setName(string $name): void
     {
@@ -102,4 +102,5 @@ class Team implements TeamInterface{
         }
         $this->sport = $sport;
     }
+    
 }
