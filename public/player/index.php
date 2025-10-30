@@ -55,7 +55,7 @@ $players = $playersManager->getPlayers();
                         <td><?= htmlspecialchars($player->getCountry()) ?></td>
                         <td><?= htmlspecialchars($player->getClub()) ?></td>
                         <td><?= htmlspecialchars($player->getPosition()) ?></td>
-                         <td><!-- permet d'afficher le nom de l'équipe et pas simplement le numéro, plusjoli
+                         <td><!-- permet d'afficher le nom de l'équipe et pas simplement le numéro, plus joli !-->
                             <?php 
                             $team = null;
                             foreach ($teams as $t) {
