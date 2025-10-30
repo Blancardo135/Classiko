@@ -1,15 +1,13 @@
 <?php
 require_once __DIR__ . '/../../src/utils/autoloader.php';
-require_once __DIR__ . '/../src/classes/Player/PlayersManager.php';
-require_once __DIR__ . '/../src/classes/Player/Player.php';
-require_once __DIR__ . '/../src/classes/Team/TeamsManager.php';
 
 use Player\PlayersManager;
 use Player\Player;
+use Team\TeamsManager;
 
 $playersManager = new PlayersManager();
 $teamsManager = new TeamsManager();
-$teams = $teamsManager->getAllTeams();
+$teams = $teamsManager->getTeams();
 
 $errors = [];
 $firstname = $lastname = $country = $club = $position = $team_id = '';
@@ -21,18 +19,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $club = $_POST['club'];
     $position = $_POST['position'];
     $team_id = $_POST['team_id'];
-
-    $player = new Player($firstname, $lastname, $country, $club, $position, $team_id);
-    $errors = [];
-
+    
     try {
         $player = new Player(
+            null,
             $firstname,
             $lastname,
             $country,
             $club,
             $position,
-            $team_id
+            (int)$team_id
 
         );
     } catch (InvalidArgumentException $e) {
@@ -90,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <?php } ?>
         <?php } ?>
 
-        <form action="create.php" method="POST">
+        <form action="createPlayer.php" method="POST">
             <label for="firstname">Prénom :</label>
             <input type="text" id="firstname" name="firstname" value="<?= htmlspecialchars($firstname); ?>" required minlength="2">
             <br>

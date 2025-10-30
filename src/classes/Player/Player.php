@@ -1,13 +1,11 @@
 <?php
-// src/Player.php
 
 namespace Player;
 
-require_once __DIR__ . '/Player.php';
 
 class Player implements PlayerInterface {
     // Propriétés privées pour assurer l'encapsulation
-    private int $id;
+    private ?int $id; //comme dans team, j'ai mis le "?" pour le rendre nullable
     private string $firstname;
     private string $lastname;
     private string $country;
@@ -16,7 +14,7 @@ class Player implements PlayerInterface {
     private int $team_id;
 
     // Constructeur pour initialiser l'objet
-    public function __construct(?int $id, string $firstname, string $lastname, $country, $club, $position, $team_id) {
+    public function __construct(?int $id, string $firstname, string $lastname, string $country, string $club, string $position, int $team_id) {
         // Vérification des données
         if (empty($firstname)) {
             throw new \InvalidArgumentException("Le prénom du joueur est requis.");
@@ -63,7 +61,7 @@ class Player implements PlayerInterface {
     }
 
     // Getters pour accéder aux propriétés
-    public function getId(): int {
+    public function getId(): ?int {
         return $this->id;
     }
 
@@ -92,7 +90,7 @@ class Player implements PlayerInterface {
     }
 
     // Setters pour modifier les propriétés
-    public function setId(int $id): void {
+    public function setId(?int $id): void {
         $this->id = $id;
     }
 

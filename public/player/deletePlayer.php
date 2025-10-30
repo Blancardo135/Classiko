@@ -1,15 +1,13 @@
 <?php
 require_once __DIR__ . '/../../src/utils/autoloader.php';
-require_once __DIR__ . '/../src/classes/Player/PlayersManager.php';
-require_once __DIR__ . '/../src/classes/Player/Player.php';
-require_once __DIR__ . '/../src/classes/Team/TeamsManager.php';
 
 use Player\PlayersManager;
 use Player\Player;
+use Team\TeamsManager;
 
 $playersManager = new PlayersManager();
 $teamsManager = new TeamsManager();
-$teams = $teamsManager->getAllTeams();
+$teams = $teamsManager->getTeams();
 
 if (isset($_GET["id"])) {
     // Récupération de l'ID de l'outil de la superglobale `$_GET`

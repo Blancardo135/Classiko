@@ -4,7 +4,7 @@ namespace Player;
 
 interface PlayerInterface
 {
-    public function getId(): int;
+    public function getId(): ?int;
     public function getFirstName(): string;
     public function getLastName(): string;
     public function getCountry(): string;
