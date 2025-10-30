@@ -10,7 +10,7 @@ use Team\Team;
 
 // Instanciation du gestionnaire d'équipes
 $teamsManager = new TeamsManager();
-$teams = $teamsManager->getAllTeams(); // Récupération de toutes les équipes
+$teams = $teamsManager->getTeams(); // Récupération de toutes les équipes
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +48,7 @@ $teams = $teamsManager->getAllTeams(); // Récupération de toutes les équipes
                 <?php foreach ($teams as $team) { ?>
                     <tr>
                         <td><?= htmlspecialchars($team->getName()) ?></td>
-                        <td><?= htmlspecialchars($team->getCountry()) ?></td>
+                        <td><?= htmlspecialchars($team->getSport()) ?></td>
                         <td>
                             <a href="edit.php?id=<?= htmlspecialchars($team->getId()) ?>"><button>Modifier</button></a>
                             <a href="delete.php?id=<?= htmlspecialchars($team->getId()) ?>"><button>Supprimer</button></a>
