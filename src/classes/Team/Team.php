@@ -3,7 +3,7 @@
 namespace Team;
 
 class Team implements TeamInterface{
-    private int $id;
+    private ?int $id; // fait que la propriété peut être nulle
     private string $name;
     private int $nbPlayers;
     private string $descr;
@@ -41,7 +41,7 @@ class Team implements TeamInterface{
         $this->sport = $sport;
     }
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -66,7 +66,7 @@ class Team implements TeamInterface{
         return $this->sport;
     }
 
-    public function setId(int $id): void
+    public function setId(?int $id): void
     {
         $this->id = $id ?? 0;
         }
