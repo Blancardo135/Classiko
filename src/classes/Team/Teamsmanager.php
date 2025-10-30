@@ -10,7 +10,7 @@ class TeamsManager implements TeamsManagerInterface
 
     public function __construct()
     {
-        $this->database = new Database();
+        $this->database = Database::getInstance();  // Change juste cette ligne
     }
 
     /**
