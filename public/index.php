@@ -1,5 +1,7 @@
 <?php
 require_once __DIR__ . '/../src/utils/autoloader.php';
+require_once __DIR__ . '/../src/config/translations.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -20,6 +22,19 @@ require_once __DIR__ . '/../src/utils/autoloader.php';
 
         <p><a href="team/index.php"><button>Voir les équipes</button></a></p>
         <p><a href="player/index.php"><button>Voir les joueurs</button></a></p>
+
+        <!-- cookie langue -->
+        <hr>
+        <form method="get" style="margin-top: 1em;">
+            <label for="lang">Choisissez votre langue :</label>
+            <select name="lang" id="lang" onchange="this.form.submit()">
+                <option value="fr" selected>Français</option>
+                <option value="en">English</option>
+            </select>
+        </form>
+
+        <p style="font-size: 0.9em; color: gray;">Langue actuelle : FR</p>
+        <!-- cookie langue -->
     </main>
 </body>
 </html>

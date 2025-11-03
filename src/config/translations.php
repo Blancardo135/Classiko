@@ -1,0 +1,122 @@
+<?php
+$translations = [
+    'en' => [
+        // General Interface
+        'teams_management' => 'Teams Management',
+        'players_management' => 'Players Management',
+        'welcome' => 'Welcome to the team management app.',
+        'view_teams' => 'View Teams',
+        'view_players' => 'View Players',
+        'add_team' => 'Add a Team',
+        'add_player' => 'Add a Player',
+        'edit_team' => 'Edit Team',
+        'edit_player' => 'Edit Player',
+        'delete_team' => 'Delete Team',
+        'delete_player' => 'Delete Player',
+        'choose_language' => 'Choose your language',
+        'current_language' => 'Current language:',
+        'submit' => 'Submit',
+        'cancel' => 'Cancel',
+        'actions' => 'Actions',
+        'home' => 'Home',
+ 
+        // Player/Team forms
+        'player_firstName' => 'Player First Name',
+        'player_lastName' => 'Player Last Name',
+        'player_country' => 'Player Country',
+        'player_club' => 'Player Club',
+        'player_position' => 'Player Position',
+        'player_team' => 'Player Team',
+        'team_name' => 'Team Name',
+        'team_description' => 'Team Description',
+        'team_sport' => 'Sport',
+        'team_nbPlayers' => 'Number of Players',
+        'create_player' => 'Create Player',
+        'create_team' => 'Create Team',
+        'update_player' => 'Update Player',
+        'update_team' => 'Update Team',
+ 
+        // Confirmation & Errors
+        'player_deleted_success' => 'Player successfully deleted.',
+        'team_deleted_success' => 'Team successfully deleted.',
+        'player_created_success' => 'Player successfully created.',
+        'team_created_success' => 'Team successfully created.',
+        'player_updated_success' => 'Player successfully updated.',
+        'team_updated_success' => 'Team successfully updated.',
+        'no_player_id' => 'No player ID specified.',
+        'no_team_id' => 'No team ID specified.',
+        'not_found' => 'Not found.',
+        'error_occurred' => 'An error occurred.',
+ 
+        // List displays
+        'players_list' => 'Players List',
+        'teams_list' => 'Teams List',
+        'view_details' => 'View Details',
+ 
+        // Misc
+        'logout' => 'Logout',
+        'login' => 'Login',
+        'username' => 'Username',
+        'password' => 'Password',
+    ],
+    'fr' => [
+        // Interface générale
+        'teams_management' => 'Gestion des équipes',
+        'players_management' => 'Gestion des joueurs',
+        'welcome' => 'Bienvenue dans l’application de gestion d’équipes.',
+        'view_teams' => 'Voir les équipes',
+        'view_players' => 'Voir les joueurs',
+        'add_team' => 'Ajouter une équipe',
+        'add_player' => 'Ajouter un joueur',
+        'edit_team' => 'Modifier l’équipe',
+        'edit_player' => 'Modifier le joueur',
+        'delete_team' => 'Supprimer l’équipe',
+        'delete_player' => 'Supprimer le joueur',
+        'choose_language' => 'Choisissez votre langue',
+        'current_language' => 'Langue actuelle :',
+        'submit' => 'Valider',
+        'cancel' => 'Annuler',
+        'actions' => 'Actions',
+        'home' => 'Accueil',
+ 
+        // Formulaires joueur/équipe
+        'player_firstName' => 'Prénom',
+        'player_lastName' => 'Nom',
+        'player_country' => 'Pays',
+        'player_club' => 'Club',
+        'player_position' => 'Poste',
+        'player_team' => 'Équipe',
+        'team_name' => 'Nom de l’équipe',
+        'team_description' => 'Description',
+        'team_sport' => 'Sport',
+        'team_nbPlayers' => 'Nombre de joueurs',
+        'create_player' => 'Créer un joueur',
+        'create_team' => 'Créer une équipe',
+        'update_player' => 'Mettre à jour le joueur',
+        'update_team' => 'Mettre à jour l’équipe',
+ 
+        // Messages confirmation & erreurs
+        'player_deleted_success' => 'Joueur supprimé avec succès.',
+        'team_deleted_success' => 'Équipe supprimée avec succès.',
+        'player_created_success' => 'Joueur créé avec succès.',
+        'team_created_success' => 'Équipe créée avec succès.',
+        'player_updated_success' => 'Joueur mis à jour avec succès.',
+        'team_updated_success' => 'Équipe mise à jour avec succès.',
+        'no_player_id' => 'Aucun identifiant de joueur spécifié.',
+        'no_team_id' => 'Aucun identifiant d’équipe spécifié.',
+        'not_found' => 'Non trouvé.',
+        'error_occurred' => 'Une erreur est survenue.',
+ 
+        // Listes affichage
+        'players_list' => 'Liste des joueurs',
+        'teams_list' => 'Liste des équipes',
+        'view_details' => 'Voir les détails',
+ 
+        // Divers
+        'logout' => 'Se déconnecter',
+        'login' => 'Se connecter',
+        'username' => 'Nom d’utilisateur',
+        'password' => 'Mot de passe',
+    ]
+];
+?>

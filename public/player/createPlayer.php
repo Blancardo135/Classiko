@@ -1,5 +1,7 @@
 <?php
 require_once __DIR__ . '/../../src/utils/autoloader.php';
+require_once __DIR__ . '/../src/config/translations.php';
+require_once __DIR__ . '/../src/config/lang.php';
 
 use Player\PlayersManager;
 use Player\Player;
@@ -87,23 +89,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <?php } ?>
 
         <form action="createPlayer.php" method="POST">
-            <label for="firstname">Prénom :</label>
+            <label for="firstname"><?php echo t('player_firstName'); ?></label>
             <input type="text" id="firstname" name="firstname" value="<?= htmlspecialchars($firstname); ?>" required minlength="2">
             <br>
 
-            <label for="lastname">Nom :</label>
+            <label for="lastname"><?php echo t('player_lastName'); ?></label>
             <input type="text" id="lastname" name="lastname" value="<?= htmlspecialchars($lastname); ?>" required minlength="2">
             <br>
 
-            <label for="country">Pays :</label>
+            <label for="country"><?php echo t('player_country'); ?></label>
             <input type="text" id="country" name="country" value="<?= htmlspecialchars($country); ?>" required minlength="2">
             <br>
 
-            <label for="club">Club :</label>
+            <label for="club"><?php echo t('player_club'); ?></label>
             <input type="text" id="club" name="club" value="<?= htmlspecialchars($club); ?>" required minlength="2">
             <br>
 
-            <label for="position">Position :</label>
+            <label for="position"><?php echo t('player_position'); ?></label>
             <input type="text" id="position" name="position" value="<?= htmlspecialchars($position); ?>" required minlength="2">
             <br>
 
