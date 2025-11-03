@@ -9,7 +9,7 @@ interface PlayerInterface
     public function getLastName(): string;
     public function getCountry(): string;
     public function getPosition(): string;
-    public function getTeamId(): int;
+    public function getTeamId(): ?int;
     public function getClub(): string;
 
 

@@ -2,19 +2,18 @@
 
 namespace Player;
 
-
 class Player implements PlayerInterface {
     // Propriétés privées pour assurer l'encapsulation
-    private ?int $id; //comme dans team, j'ai mis le "?" pour le rendre nullable
+    private ?int $id; // peut être nul (ex: avant insertion)
     private string $firstname;
     private string $lastname;
     private string $country;
     private string $club;
     private string $position;
-    private int $team_id;
+    private ?int $team_id; // peut être nul si l'équipe a été supprimée
 
     // Constructeur pour initialiser l'objet
-    public function __construct(?int $id, string $firstname, string $lastname, string $country, string $club, string $position, int $team_id) {
+    public function __construct(?int $id, string $firstname, string $lastname, string $country, string $club, string $position, ?int $team_id) {
         // Vérification des données
         if (empty($firstname)) {
             throw new \InvalidArgumentException("Le prénom du joueur est requis.");
@@ -44,23 +43,17 @@ class Player implements PlayerInterface {
             throw new \InvalidArgumentException("La position est requise.");
         }
 
-        if ($team_id===null) {
-            throw new \InvalidArgumentException("L'équipe est requise.");
-        } elseif ($team_id===0) {
-            throw new \InvalidArgumentException("L'équipe est requise.");
-        }
-
-        // Initialisation des propriétés
+        // L'équipe peut être nulle si elle a été supprimée
         $this->id = $id;
         $this->firstname = $firstname;
         $this->lastname = $lastname;
         $this->country = $country;
         $this->club = $club;
         $this->position = $position;
-        $this->team_id = $team_id;
+        $this->team_id = $team_id; // peut être null maintenant
     }
 
-    // Getters pour accéder aux propriétés
+    // Getters
     public function getId(): ?int {
         return $this->id;
     }
@@ -85,22 +78,21 @@ class Player implements PlayerInterface {
         return $this->position;
     }
 
-    public function getTeamId(): int {
-        return $this->team_id;
+    public function getTeamId(): ?int {
+        return $this->team_id; // retourne null si le joueur n'a plus d'équipe
     }
 
-    // Setters pour modifier les propriétés
+    // Setters
     public function setId(?int $id): void {
         $this->id = $id;
     }
 
-    public function setFirstName (string $firstname): void {
+    public function setFirstName(string $firstname): void {
         if (empty($firstname)) {
             throw new \InvalidArgumentException("Le prénom du joueur est requis.");
         } else if (strlen($firstname) < 2) {
             throw new \InvalidArgumentException("Le prénom du joueur doit contenir au moins 2 caractères.");
         }
-
         $this->firstname = $firstname;
     }
 
@@ -110,7 +102,6 @@ class Player implements PlayerInterface {
         } else if (strlen($lastname) < 2) {
             throw new \InvalidArgumentException("Le nom du joueur doit contenir au moins 2 caractères.");
         }
-
         $this->lastname = $lastname;
     }
 
@@ -120,7 +111,6 @@ class Player implements PlayerInterface {
         } elseif (strlen($country) < 2) {
             throw new \InvalidArgumentException("Le pays doit contenir au moins 2 caractères.");
         }
-
         $this->country = $country;
     }
 
@@ -130,7 +120,6 @@ class Player implements PlayerInterface {
         } elseif (strlen($club) < 2) {
             throw new \InvalidArgumentException("Le club doit contenir au moins 2 caractères.");
         }
-
         $this->club = $club;
     }
 
@@ -138,12 +127,11 @@ class Player implements PlayerInterface {
         if (empty($position)) {
             throw new \InvalidArgumentException("La position est requise.");
         }
-
         $this->position = $position;
     }
 
-    public function setTeamId(int $team_id): void {
-        $this->team_id = $team_id;
+    public function setTeamId(?int $team_id): void {
+        $this->team_id = $team_id; // accepte null
     }
 }
 
