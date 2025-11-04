@@ -44,12 +44,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         } catch (PDOException $e) {
 
             if ($e->getCode() === "23000") {
-                $errors[] = "L'outil existe déjà.";
+                $errors[] = 'tool_exists';
             } else {
-                $errors[] = "Erreur lors de l'interaction avec la base de données : " . $e->getMessage();
+                $errors[] = 'db_error' . $e->getMessage();
             }
         } catch (Exception $e) {
-            $errors[] = "Erreur inattendue : " . $e->getMessage();
+            $errors[] = 'unexpected_error' . $e->getMessage();
         }
     }
 }
@@ -65,21 +65,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
     <link rel="stylesheet" href="../assets/css/custom.css">
 
-    <title>Créer un nouveau joueur | MyApp</title>
+    <title><?php echo t('create_newPlayer'); ?> | MyApp</title>
 </head>
 
 
 <body>
     <main class="container">
-        <h1>Créer un nouveau joueur</h1>
+        <h1><?php echo t('create_newPlayer'); ?></h1>
 
-        <p><a href="../index.php">Accueil</a> > <a href="index.php">Gestion des joueurs</a> > Création d'un nouveau joueur</p>
+        <p><a href="../index.php"><?php echo t('home'); ?></a> > <a href="index.php"><?php echo t('players_management'); ?></a> > <?php echo t('create_newPlayer'); ?></p>
 
         <?php if ($_SERVER["REQUEST_METHOD"] === "POST") { ?>
             <?php if (empty($errors)) { ?>
-                <p style="color: green;">Le formulaire a été soumis avec succès !</p>
+                <p style="color: green;"><?php echo t('form_submit'); ?></p>
             <?php } else { ?>
-                <p style="color: red;">Le formulaire contient des erreurs :</p>
+                <p style="color: red;"><?php echo t('form_error'); ?></p>
                 <ul>
                     <?php foreach ($errors as $error) { ?>
                         <li><?php echo $error; ?></li>
@@ -109,16 +109,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <input type="text" id="position" name="position" value="<?= htmlspecialchars($position); ?>" required minlength="2">
             <br>
 
-            <label for="team_id">Équipe :
+            <label for="team_id"><?php echo t('player_team'); ?> :
                 <select id="team_id" name="team_id" required>
-                    <option value="">-- Sélectionner --</option>
+                    <option value="">-- <?php echo t('select'); ?> --</option>
                     <?php foreach ($teams as $team) : ?>
                         <option value="<?= $team->getId(); ?>"><?= htmlspecialchars($team->getName()); ?></option>
                     <?php endforeach; ?>
                 </select>
             </label><br>
 
-            <button type="submit">Créer</button>
+            <button type="submit"><?php echo t('create'); ?></button>
         </form>
     </main>
 </body>

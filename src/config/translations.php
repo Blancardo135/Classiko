@@ -7,6 +7,7 @@ $translations = [
         'welcome' => 'Welcome to the team management app.',
         'view_teams' => 'View Teams',
         'view_players' => 'View Players',
+        'create_newPlayer' => 'Create a New Player',
         'add_team' => 'Add a Team',
         'add_player' => 'Add a Player',
         'edit_team' => 'Edit Team',
@@ -19,6 +20,13 @@ $translations = [
         'cancel' => 'Cancel',
         'actions' => 'Actions',
         'home' => 'Home',
+        'select' => 'Select',
+        'create' => 'Create',
+        'form_submit' => 'The form has been submit with success !',
+        'form_error' => 'The form contains errors :',
+        'tool_exists' => 'The tool already exists.',
+        'db_error' => 'Error while the interaction with the database : ',
+        'unexpected_error' => 'Unexpected error : ',
  
         // Player/Team forms
         'player_firstName' => 'Player First Name',
@@ -66,6 +74,7 @@ $translations = [
         'welcome' => 'Bienvenue dans l’application de gestion d’équipes.',
         'view_teams' => 'Voir les équipes',
         'view_players' => 'Voir les joueurs',
+        'create_newPlayer' => 'Créer un nouveau joueur',
         'add_team' => 'Ajouter une équipe',
         'add_player' => 'Ajouter un joueur',
         'edit_team' => 'Modifier l’équipe',
@@ -78,6 +87,14 @@ $translations = [
         'cancel' => 'Annuler',
         'actions' => 'Actions',
         'home' => 'Accueil',
+        'select' => 'Sélectionner',
+        'create' => 'Créer',
+        'form_submit' => 'Le formulaire a été soumis avec succès !',
+        'form_error' => 'Le formulaire contient des erreurs :',
+        'tool_exists' => 'L’outil existe déjà.',
+        'db_error' => 'Erreur lors de l’interaction avec la base de données : ',
+        'unexpected_error' => 'Erreur inattendue : ',
+
  
         // Formulaires joueur/équipe
         'player_firstName' => 'Prénom',
