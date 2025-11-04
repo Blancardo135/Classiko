@@ -3,11 +3,10 @@
 namespace Player;
 
 // Inclusion du système de traduction
-require_once __DIR__ . '/../config/translations.php';
-require_once __DIR__ . '/../config/lang.php';
+require_once __DIR__ . '/../../config/translations.php';
+require_once __DIR__ . '/../../config/lang.php';
 
-class Player implements PlayerInterface
-{
+class Player implements PlayerInterface {
     private ?int $id;
     private string $firstname;
     private string $lastname;
@@ -16,8 +15,7 @@ class Player implements PlayerInterface
     private string $position;
     private ?int $team_id;
 
-    public function __construct(?int $id, string $firstname, string $lastname, string $country, string $club, string $position, ?int $team_id)
-    {
+    public function __construct(?int $id, string $firstname, string $lastname, string $country, string $club, string $position, ?int $team_id) {
         // Vérification des données
         if (empty($firstname)) {
             throw new \InvalidArgumentException(t('error_firstname_required'));
@@ -57,49 +55,40 @@ class Player implements PlayerInterface
     }
 
     // Getters
-    public function getId(): ?int
-    {
+    public function getId(): ?int {
         return $this->id;
     }
 
-    public function getFirstName(): string
-    {
+    public function getFirstName(): string {
         return $this->firstname;
     }
 
-    public function getLastName(): string
-    {
+    public function getLastName(): string {
         return $this->lastname;
     }
 
-    public function getCountry(): string
-    {
+    public function getCountry(): string {
         return $this->country;
     }
 
-    public function getClub(): string
-    {
+    public function getClub(): string {
         return $this->club;
     }
 
-    public function getPosition(): string
-    {
+    public function getPosition(): string {
         return $this->position;
     }
 
-    public function getTeamId(): ?int
-    {
+    public function getTeamId(): ?int {
         return $this->team_id;
     }
 
     // Setters
-    public function setId(?int $id): void
-    {
+    public function setId(?int $id): void {
         $this->id = $id;
     }
 
-    public function setFirstName(string $firstname): void
-    {
+    public function setFirstName(string $firstname): void {
         if (empty($firstname)) {
             throw new \InvalidArgumentException(t('error_firstname_required'));
         } else if (strlen($firstname) < 2) {
@@ -108,8 +97,7 @@ class Player implements PlayerInterface
         $this->firstname = $firstname;
     }
 
-    public function setLastName(string $lastname): void
-    {
+    public function setLastName(string $lastname): void {
         if (empty($lastname)) {
             throw new \InvalidArgumentException(t('error_lastname_required'));
         } else if (strlen($lastname) < 2) {
@@ -118,8 +106,7 @@ class Player implements PlayerInterface
         $this->lastname = $lastname;
     }
 
-    public function setCountry(string $country): void
-    {
+    public function setCountry(string $country): void {
         if (empty($country)) {
             throw new \InvalidArgumentException(t('error_country_required'));
         } elseif (strlen($country) < 2) {
@@ -128,8 +115,7 @@ class Player implements PlayerInterface
         $this->country = $country;
     }
 
-    public function setClub(string $club): void
-    {
+    public function setClub(string $club): void {
         if (empty($club)) {
             throw new \InvalidArgumentException(t('error_club_required'));
         } elseif (strlen($club) < 2) {
@@ -138,16 +124,14 @@ class Player implements PlayerInterface
         $this->club = $club;
     }
 
-    public function setPosition(string $position): void
-    {
+    public function setPosition(string $position): void {
         if (empty($position)) {
             throw new \InvalidArgumentException(t('error_position_required'));
         }
         $this->position = $position;
     }
 
-    public function setTeamId(?int $team_id): void
-    {
+    public function setTeamId(?int $team_id): void {
         $this->team_id = $team_id;
     }
 }

@@ -3,18 +3,17 @@
 namespace Team;
 
 // Inclusion du système de traduction
-require_once __DIR__ . '/../config/translations.php';
-require_once __DIR__ . '/../config/lang.php';
+require_once __DIR__ . '/../../config/translations.php';
+require_once __DIR__ . '/../../config/lang.php';
 
-class Team implements TeamInterface
-{
+class Team implements TeamInterface {
     private ?int $id;
     private string $name;
     private int $nbPlayers;
     private string $descr;
     private string $sport;
 
-    public function __construct(?int $id, string $name, int $nbPlayers, string $descr, string $sport)
+    public function __construct(?int $id, string $name, int $nbPlayers, string $descr, string $sport) 
     {
         if (empty($name)) {
             throw new \InvalidArgumentException(t('error_team_name_required'));
