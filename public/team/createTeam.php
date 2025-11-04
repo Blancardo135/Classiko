@@ -1,17 +1,14 @@
 <?php
-// Inclut l'autoloader pour charger automatiquement les classes
 require_once __DIR__ . '/../../src/utils/autoloader.php';
+require_once __DIR__ . '/../../src/config/translations.php';
+require_once __DIR__ . '/../../src/config/lang.php';
 
-// Importe les classes nécessaires avec des namespaces
 use Team\TeamsManager;
 use Team\Team;
 
-// Création d'une instance du gestionnaire d'équipes
 $teamsManager = new TeamsManager();
 
-// Gestion de la soumission du formulaire
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Récupération des données du formulaire
     $name = $_POST["name"];
     $nbPlayers = $_POST["nbPlayers"];
     $descr = $_POST["descr"];
@@ -20,43 +17,37 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $errors = [];
 
     try {
-        // Création d'un objet Team avec les données saisies
         $team = new Team(
-            null, // id = null pour l'insertion
+            null,
             $name,
             (int)$nbPlayers,
             $descr,
             $sport
         );
     } catch (InvalidArgumentException $e) {
-        // Gère les erreurs de validation (ex: nombre négatif, champ vide)
         $errors[] = $e->getMessage();
     }
 
-    // Si aucune erreur, tentative d'insertion en base de données
     if (empty($errors)) {
         try {
-            $teamId = $teamsManager->addTeam($team); // Méthode du manager pour insérer
-
-            // Redirection vers la page d'accueil (ou autre)
-            header("Location: ../index.php");
+            $teamId = $teamsManager->addTeam($team);
+            header("Location: index.php");
             exit();
         } catch (PDOException $e) {
-            // Erreur SQL (doublons, contraintes, etc.)
             if ($e->getCode() === "23000") {
-                $errors[] = "Une équipe avec ce nom existe déjà.";
+                $errors[] = t('tool_exists');
             } else {
-                $errors[] = "Erreur lors de la base de données : " . $e->getMessage();
+                $errors[] = t('db_error') . $e->getMessage();
             }
         } catch (Exception $e) {
-            $errors[] = "Erreur inattendue : " . $e->getMessage();
+            $errors[] = t('unexpected_error') . $e->getMessage();
         }
     }
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="<?= $language ?>">
 
 <head>
     <meta charset="utf-8">
@@ -64,21 +55,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta name="color-scheme" content="light dark">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
     <link rel="stylesheet" href="../css/custom.css">
-    <title>Créer une équipe | MonApp</title>
+    <title><?= t('create_team') ?> | MyApp</title>
 </head>
 
 <body>
     <main class="container">
-        <h1>Créer une nouvelle équipe</h1>
+        <h1><?= t('create_team') ?></h1>
 
-        <p><a href="../index.php">Accueil</a> > <a href="index.php">Gestion des équipes</a> > Création d'une équipe</p>
+        <p><a href="../index.php"><?= t('home') ?></a> > <a href="index.php"><?= t('teams_management') ?></a> > <?= t('create_team') ?></p>
 
-        <!-- Affichage des messages de validation ou d'erreur -->
         <?php if ($_SERVER["REQUEST_METHOD"] === "POST") { ?>
             <?php if (empty($errors)) { ?>
-                <p style="color: green;">L’équipe a été créée avec succès !</p>
+                <p style="color: green;"><?= t('team_created_success') ?></p>
             <?php } else { ?>
-                <p style="color: red;">Le formulaire contient des erreurs :</p>
+                <p style="color: red;"><?= t('form_error') ?></p>
                 <ul>
                     <?php foreach ($errors as $error) { ?>
                         <li><?= htmlspecialchars($error); ?></li>
@@ -87,21 +77,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <?php } ?>
         <?php } ?>
 
-        <!-- Formulaire de création d'une équipe -->
         <form action="createTeam.php" method="POST">
-            <label for="name">Nom de l’équipe</label>
+            <label for="name"><?= t('team_name') ?></label>
             <input type="text" id="name" name="name" value="<?= htmlspecialchars($name ?? ''); ?>" required minlength="2">
 
-            <label for="nbPlayers">Nombre de joueurs</label>
+            <label for="nbPlayers"><?= t('team_nbPlayers') ?></label>
             <input type="number" id="nbPlayers" name="nbPlayers" value="<?= htmlspecialchars($nbPlayers ?? ''); ?>" required min="1">
 
-            <label for="descr">Description</label>
+            <label for="descr"><?= t('team_description') ?></label>
             <textarea id="descr" name="descr" rows="3"><?= htmlspecialchars($descr ?? ''); ?></textarea>
 
-            <label for="sport">Sport</label>
+            <label for="sport"><?= t('team_sport') ?></label>
             <input type="text" id="sport" name="sport" value="<?= htmlspecialchars($sport ?? ''); ?>" required>
 
-            <button type="submit">Créer l’équipe</button>
+            <button type="submit"><?= t('create_team') ?></button>
         </form>
     </main>
 </body>

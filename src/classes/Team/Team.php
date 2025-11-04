@@ -2,36 +2,40 @@
 
 namespace Team;
 
-class Team implements TeamInterface{
-    private ?int $id; // fait que la propriété peut être nulle
+// Inclusion du système de traduction
+require_once __DIR__ . '/../config/translations.php';
+require_once __DIR__ . '/../config/lang.php';
+
+class Team implements TeamInterface
+{
+    private ?int $id;
     private string $name;
     private int $nbPlayers;
     private string $descr;
     private string $sport;
 
-   
-    public function __construct(?int $id, string $name, int $nbPlayers, string $descr, string $sport) 
+    public function __construct(?int $id, string $name, int $nbPlayers, string $descr, string $sport)
     {
         if (empty($name)) {
-            throw new \InvalidArgumentException("Le nom de l’équipe est requis.");
+            throw new \InvalidArgumentException(t('error_team_name_required'));
         } elseif (strlen(trim($name)) < 2) {
-            throw new \InvalidArgumentException("Le nom de l’équipe doit contenir au moins 2 caractères.");
+            throw new \InvalidArgumentException(t('error_team_name_min_length'));
         }
 
         if ($nbPlayers < 1) {
-            throw new \InvalidArgumentException("Le nombre de joueurs doit être d’au moins 1.");
+            throw new \InvalidArgumentException(t('error_team_nbplayers_min'));
         }
 
         if (empty($descr)) {
-            throw new \InvalidArgumentException("La description est requise.");
+            throw new \InvalidArgumentException(t('error_team_descr_required'));
         } elseif (strlen(trim($descr)) < 5) {
-            throw new \InvalidArgumentException("La description doit contenir au moins 5 caractères.");
+            throw new \InvalidArgumentException(t('error_team_descr_min_length'));
         }
 
         if (empty($sport)) {
-            throw new \InvalidArgumentException("Le sport est requis.");
+            throw new \InvalidArgumentException(t('error_team_sport_required'));
         } elseif (strlen(trim($sport)) < 2) {
-            throw new \InvalidArgumentException("Le sport doit contenir au moins 2 caractères.");
+            throw new \InvalidArgumentException(t('error_team_sport_min_length'));
         }
 
         $this->id = $id;
@@ -69,12 +73,12 @@ class Team implements TeamInterface{
     public function setId(?int $id): void
     {
         $this->id = $id ?? 0;
-        }
+    }
 
     public function setName(string $name): void
     {
         if (empty($name) || strlen(trim($name)) < 2) {
-            throw new \InvalidArgumentException("Le nom de l’équipe doit contenir au moins 2 caractères.");
+            throw new \InvalidArgumentException(t('error_team_name_min_length'));
         }
         $this->name = $name;
     }
@@ -82,7 +86,7 @@ class Team implements TeamInterface{
     public function setNbPlayers(int $nbPlayers): void
     {
         if ($nbPlayers < 1) {
-            throw new \InvalidArgumentException("Le nombre de joueurs doit être d’au moins 1.");
+            throw new \InvalidArgumentException(t('error_team_nbplayers_min'));
         }
         $this->nbPlayers = $nbPlayers;
     }
@@ -90,7 +94,7 @@ class Team implements TeamInterface{
     public function setDescr(string $descr): void
     {
         if (empty($descr) || strlen(trim($descr)) < 5) {
-            throw new \InvalidArgumentException("La description doit contenir au moins 5 caractères.");
+            throw new \InvalidArgumentException(t('error_team_descr_min_length'));
         }
         $this->descr = $descr;
     }
@@ -98,9 +102,8 @@ class Team implements TeamInterface{
     public function setSport(string $sport): void
     {
         if (empty($sport) || strlen(trim($sport)) < 2) {
-            throw new \InvalidArgumentException("Le sport doit contenir au moins 2 caractères.");
+            throw new \InvalidArgumentException(t('error_team_sport_min_length'));
         }
         $this->sport = $sport;
     }
-    
 }

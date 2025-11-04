@@ -1,20 +1,17 @@
 <?php
-// Inclusion de l'autoloader pour charger automatiquement les classes
 require_once __DIR__ . '/../../src/utils/autoloader.php';
-
-// Inclusion explicite des classes nécessaires (optionnelle si l'autoloader est bien configuré)
-
+require_once __DIR__ . '/../../src/config/translations.php';
+require_once __DIR__ . '/../../src/config/lang.php';
 
 use Team\TeamsManager;
 use Team\Team;
 
-// Instanciation du gestionnaire d'équipes
 $teamsManager = new TeamsManager();
-$teams = $teamsManager->getTeams(); // Récupération de toutes les équipes
+$teams = $teamsManager->getTeams();
 ?>
 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="<?= $language ?>">
 
 <head>
     <meta charset="utf-8">
@@ -23,25 +20,25 @@ $teams = $teamsManager->getTeams(); // Récupération de toutes les équipes
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
     <link rel="stylesheet" href="../assets/css/custom.css">
 
-    <title>Gestion des équipes | MyApp</title>
+    <title><?= t('teams_management') ?> | MyApp</title>
 </head>
 
 <body>
     <main class="container">
-        <h1>Gestion des équipes</h1>
+        <h1><?= t('teams_management') ?></h1>
 
-        <p><a href="../index.php">Accueil</a> > Gestion des équipes</p>
+        <p><a href="../index.php"><?= t('home') ?></a> > <?= t('teams_management') ?></p>
 
-        <h2>Liste des équipes</h2>
+        <h2><?= t('teams_list') ?></h2>
 
-        <p><a href="createTeam.php"><button>Créer une nouvelle équipe</button></a></p>
+        <p><a href="createTeam.php"><button><?= t('add_team') ?></button></a></p>
 
         <table>
             <thead>
                 <tr>
-                    <th>Nom</th>
-                    <th>Pays</th>
-                    <th>Actions</th>
+                    <th><?= t('team_name') ?></th>
+                    <th><?= t('team_sport') ?></th>
+                    <th><?= t('actions') ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -50,8 +47,8 @@ $teams = $teamsManager->getTeams(); // Récupération de toutes les équipes
                         <td><?= htmlspecialchars($team->getName()) ?></td>
                         <td><?= htmlspecialchars($team->getSport()) ?></td>
                         <td>
-                            <a href="editTeam.php?id=<?= htmlspecialchars($team->getId()) ?>"><button>Modifier</button></a>
-                            <a href="deleteTeam.php?id=<?= htmlspecialchars($team->getId()) ?>"><button>Supprimer</button></a>
+                            <a href="editTeam.php?id=<?= htmlspecialchars($team->getId()) ?>"><button><?= t('edit_team') ?></button></a>
+                            <a href="deleteTeam.php?id=<?= htmlspecialchars($team->getId()) ?>"><button><?= t('delete_team') ?></button></a>
                         </td>
                     </tr>
                 <?php } ?>
