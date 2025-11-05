@@ -23,6 +23,24 @@ require_once __DIR__ . '/../src/config/lang.php';
  
         <p><a href="team/index.php"><button><?= t('view_teams') ?></button></a></p>
 <p><a href="player/index.php"><button><?= t('view_players') ?></button></a></p>
+
+<!--Partie sur l'authentification et session, mis le 05.11-->
+<p>Commencez par accéder à la page <a href="debug/init-db.php"><code>debug/init-db.php</code></a> pour initialiser la base de données.</p>
+
+        <h2>Pages publiques</h2>
+        <ul>
+            <li><a href="debug/init-db.php"><code>debug/init-db.php</code></a> - Page d'initialisation de la base de données (<strong>uniquement à des fins de tests</strong>)</li>
+            <li><a href="auth/register.php"><code>auth/register.php</code></a> - Créer un compte</li>
+            <li><a href="auth/login.php"><code>auth/login.php</code></a> - Se connecter</li>
+            <li><a href="public.php"><code>public.php</code></a> - Page publique</li>
+        </ul>
+
+        <h2>Pages protégées</h2>
+        <ul>
+            <li><a href="private.php"><code>private.php</code></a> - Page privée</li>
+            <li><a href="author.php"><code>author.php</code></a> - Espace auteur.trice</li>
+            <li><a href="auth/logout.php"><code>auth/logout.php</code></a> - Se déconnecter</li>
+        </ul>
  
 <!-- cookie langue -->
 <hr>
