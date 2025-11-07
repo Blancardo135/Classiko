@@ -54,8 +54,8 @@ if ($userId) {
 
                 <p><?= t('welcome') ?></p>
 
-                <p><a href="../team/index.php"><button><?= t('view_teams') ?></button></a></p>
-                <p><a href="../player/index.php"><button><?= t('view_players') ?></button></a></p>
+                <p><a href="team/index.php"><button>Voir les équipes</button></a></p>
+                <p><a href="player/index.php"><button>Voir les joueurs</button></a></p>
 
                 <!-- Partie sur l'authentification et session -->
                 <section class="menu-section">
