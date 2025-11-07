@@ -2,6 +2,20 @@
 require_once __DIR__ . '/../src/utils/autoloader.php';
 require_once __DIR__ . '/../src/config/translations.php';
 require_once __DIR__ . '/../src/config/lang.php';
+
+
+//page publique
+session_start();
+
+
+$userId = $_SESSION['user_id'] ?? null;
+
+
+if ($userId) {
+    $email = $_SESSION['email'];
+    $role = $_SESSION['role'];
+}
+
  
 ?>
 <!DOCTYPE html>
@@ -37,8 +51,7 @@ require_once __DIR__ . '/../src/config/lang.php';
 
         <h2>Pages protégées</h2>
         <ul>
-            <li><a href="private.php"><code>private.php</code></a> - Page privée</li>
-            <li><a href="author.php"><code>author.php</code></a> - Espace auteur.trice</li>
+            <li><a href="user.php"><code>user.php</code></a> - Espace utilisateur</li>
             <li><a href="auth/logout.php"><code>auth/logout.php</code></a> - Se déconnecter</li>
         </ul>
  
