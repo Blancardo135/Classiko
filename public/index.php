@@ -43,16 +43,15 @@ if ($userId) {
 
         <h2>Pages publiques</h2>
         <ul>
-            <li><a href="debug/init-db.php"><code>debug/init-db.php</code></a> - Page d'initialisation de la base de données (<strong>uniquement à des fins de tests</strong>)</li>
-            <li><a href="auth/register.php"><code>auth/register.php</code></a> - Créer un compte</li>
-            <li><a href="auth/login.php"><code>auth/login.php</code></a> - Se connecter</li>
-            <li><a href="public.php"><code>public.php</code></a> - Page publique</li>
+            <li><a href="auth/register.php"></a> - Créer un compte</li>
+            <li><a href="auth/login.php"></a> - Se connecter</li>
+            <li><a href="public.php"></a> - Page publique</li>
         </ul>
 
         <h2>Pages protégées</h2>
         <ul>
-            <li><a href="user.php"><code>user.php</code></a> - Espace utilisateur</li>
-            <li><a href="auth/logout.php"><code>auth/logout.php</code></a> - Se déconnecter</li>
+            <li><a href="user.php"></a> - Espace utilisateur</li>
+            <li><a href="auth/logout.php"></a> - Se déconnecter</li>
         </ul>
  
 <!-- cookie langue -->
