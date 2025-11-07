@@ -28,6 +28,24 @@ if ($userId) {
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
         <link rel="stylesheet" href="css/custom.css">
         <title><?= t('home') ?> | <?= t('teams_management') ?></title>
+        <style>
+                .menu-buttons {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 0.5rem;
+                        margin-bottom: 1.5rem;
+                }
+
+                .menu-buttons a button {
+                        padding: 0.4rem 0.8rem;
+                        font-size: 0.9rem;
+                        border-radius: 0.5rem;
+                }
+
+                .menu-section h2 {
+                        margin-bottom: 0.5rem;
+                }
+        </style>
 </head>
 
 <body>
@@ -39,20 +57,23 @@ if ($userId) {
                 <p><a href="team/index.php"><button><?= t('view_teams') ?></button></a></p>
                 <p><a href="player/index.php"><button><?= t('view_players') ?></button></a></p>
 
-                <!--Partie sur l'authentification et session, mis le 05.11-->
+                <!-- Partie sur l'authentification et session -->
+                <section class="menu-section">
+                        <h2>Pages publiques</h2>
+                        <div class="menu-buttons">
+                                <a href="auth/register.php"><button>Créer un compte</button></a>
+                                <a href="auth/login.php"><button>Se connecter</button></a>
+                                <a href="public.php"><button>Page publique</button></a>
+                        </div>
+                </section>
 
-                <h2>Pages publiques</h2>
-                <div class="grid">
-                        <a href="auth/register.php"><button>Créer un compte</button></a>
-                        <a href="auth/login.php"><button>Se connecter</button></a>
-                        <a href="public.php"><button>Page publique</button></a>
-                </div>
-
-                <h2>Pages protégées</h2>
-                <div class="grid">
-                        <a href="user.php"><button>Espace utilisateur</button></a>
-                        <a href="auth/logout.php"><button>Se déconnecter</button></a>
-                </div>
+                <section class="menu-section">
+                        <h2>Pages protégées</h2>
+                        <div class="menu-buttons">
+                                <a href="user.php"><button>Espace utilisateur</button></a>
+                                <a href="auth/logout.php"><button>Se déconnecter</button></a>
+                        </div>
+                </section>
 
                 <!-- cookie langue -->
                 <hr>
