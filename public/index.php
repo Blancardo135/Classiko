@@ -4,20 +4,20 @@ require_once __DIR__ . '/../src/config/translations.php';
 require_once __DIR__ . '/../src/config/lang.php';
 
 
-//page publique
-session_start();
+// //page publique
+// session_start();
 
 
-$userId = $_SESSION['user_id'] ?? null;
+// $userId = $_SESSION['user_id'] ?? null;
 
 
-if ($userId) {
-        $email = $_SESSION['email'];
-        $role = $_SESSION['role'];
-}
+// if ($userId) {
+//         $email = $_SESSION['email'];
+//         $role = $_SESSION['role'];
+// }
 
 
-?>
+// ?>
 <!DOCTYPE html>
 <html lang="<?= $language ?>">
 
@@ -54,7 +54,7 @@ if ($userId) {
 
                 <p><?= t('welcome') ?></p>
 
-                <p><a href="team/index.php"><button>Voir les équipes</button></a></p>
+                <p><a href="/public/team/index.php"><button>Voir les équipes</button></a></p>
                 <p><a href="player/index.php"><button>Voir les joueurs</button></a></p>
 
                 <!-- Partie sur l'authentification et session -->
