@@ -57,9 +57,19 @@ class Database implements DatabaseInterface {
             FOREIGN KEY (team_id) REFERENCES teams(id) ON DELETE SET NULL
         );";
 
-        $stmt = $this->pdo->prepare($sql);
+        $sqlUsers = "CREATE TABLE IF NOT EXISTS users (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            firstname VARCHAR(100) NOT NULL,
+            lastname VARCHAR(100) NOT NULL,
+            email VARCHAR(100) NOT NULL UNIQUE,
+            password VARCHAR(255) NOT NULL,
+            role ENUM('user', 'admin') NOT NULL DEFAULT 'user',
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );";
 
-        $stmt->execute();
+        $this->pdo->exec($sqlTeams);
+        $this->pdo->exec($sqlPlayers);
+        $this->pdo->exec($sqlUsers);
     }
 
     public function getPdo(): PDO {
