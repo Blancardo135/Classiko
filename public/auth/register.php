@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         try {
             // Utiliser le UserManager
-            $userManager = new UserManager();
+            $userManager = new userManager();
 
             // Créer l'utilisateur
             $userManager->createUser($firstname, $lastname, $email, $password, 'user');
