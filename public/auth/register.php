@@ -37,8 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = 'Les mots de passe ne correspondent pas.';
     } else {
         try {
-            $db = new Database();
-            $userManager = new UserManager($db);
+            // Utiliser le UserManager
+            $userManager = new UserManager();
 
             // Créer l'utilisateur
             $userManager->createUser($firstname, $lastname, $email, $password, 'user');

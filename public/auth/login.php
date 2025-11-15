@@ -1,53 +1,40 @@
 <?php
-// Constantes
-const DATABASE_FILE = __DIR__ . '/../../teamsmanager.db';
+require_once __DIR__ . '/../../src/utils/autoloader.php';
 
-// Démarre la session
 session_start();
 
-// Si l'utilisateur est déjà connecté, le rediriger vers l'accueil
 if (isset($_SESSION['user_id'])) {
     header('Location: ../index.php');
     exit();
 }
 
-// Initialise les variables
 $error = '';
 
-// Traite le formulaire de connexion
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    $email = trim($_POST['email'] ?? '');
+    $password = $_POST['password'] ?? '';
 
-    // Validation des données
-    if (empty($username) || empty($password)) {
+    if (empty($email) || empty($password)) {
         $error = 'Tous les champs sont obligatoires.';
     } else {
         try {
-            // Connexion à la base de données
-            $pdo = new PDO('sqlite:' . DATABASE_FILE);
+            $userManager = new UserManager();
+            $user = $userManager->verifyUser($email, $password);
 
-            // Récupérer l'utilisateur de la base de données
-            $stmt = $pdo->prepare('SELECT * FROM users WHERE username = :username');
-            $stmt->execute(['username' => $username]);
-            $user = $stmt->fetch();
-
-            // Vérifier le mot de passe
-            if ($user && password_verify($password, $user['password'])) {
-                // Authentification réussie - stocker les informations dans la session
+            if ($user) {
                 $_SESSION['user_id'] = $user['id'];
-                $_SESSION['username'] = $user['username'];
+                $_SESSION['firstname'] = $user['firstname'] ?? '';
+                $_SESSION['lastname'] = $user['lastname'] ?? '';
+                $_SESSION['email'] = $user['email'];
                 $_SESSION['role'] = $user['role'];
 
-                // Rediriger vers la page d'accueil
                 header('Location: ../index.php');
                 exit();
             } else {
-                // Authentification échouée
-                $error = 'Nom d\'utilisateur ou mot de passe incorrect.';
+                $error = 'Email ou mot de passe incorrect.';
             }
-        } catch (PDOException $e) {
-            $error = 'Erreur lors de la connexion : ' . $e->getMessage();
+        } catch (Exception $e) {
+            $error = 'Erreur lors de la connexion: ' . $e->getMessage();
         }
     }
 }
@@ -73,9 +60,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endif; ?>
 
         <form method="post">
-            <label for="username">
-                Nom d'utilisateur
-                <input type="text" id="username" name="username" required autofocus>
+            <label for="email">
+                Email
+                <input type="email" id="email" name="email" required autofocus>
             </label>
 
             <label for="password">
