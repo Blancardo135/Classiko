@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = 'Tous les champs sont obligatoires.';
     } else {
         try {
-            $userManager = new UserManager();
+            $userManager = new userManager();
             $user = $userManager->verifyUser($email, $password);
 
             if ($user) {
