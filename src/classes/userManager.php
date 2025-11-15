@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/Database.php';
+//require_once __DIR__ . '/Database.php';
 
 class UserManager
 {
@@ -55,5 +55,5 @@ class UserManager
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }
-require_once __DIR__ . '/Database.php';
+
 
