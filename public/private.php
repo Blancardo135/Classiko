@@ -29,18 +29,31 @@ $role = $_SESSION['role'];
 
 <body>
     <main class="container">
-        <h1>Page privée</h1>
+        <h1>🔒 Page Privée</h1>
 
         <p>Cette page est accessible uniquement aux personnes authentifiées.</p>
 
-        <p><strong>Vous êtes actuellement connecté.e</strong> :</p>
-        <ul>
-            <li><strong>ID utilisateur :</strong> <?= htmlspecialchars($userId) ?></li>
-            <li><strong>Email :</strong> <?= htmlspecialchars($email) ?></li>
-            <li><strong>Rôle :</strong> <?= htmlspecialchars($role) ?></li>
-        </ul>
+        <section>
+            <h2>✅ Vous êtes connecté.e</h2>
+            <ul>
+                <li><strong>ID utilisateur :</strong> <?= htmlspecialchars($userId) ?></li>
+                <li><strong>Prénom :</strong> <?= htmlspecialchars($_SESSION['firstname'] ?? '') ?></li>
+                <li><strong>Nom :</strong> <?= htmlspecialchars($_SESSION['lastname'] ?? '') ?></li>
+                <li><strong>Email :</strong> <?= htmlspecialchars($email) ?></li>
+                <li><strong>Rôle :</strong> <strong><?= htmlspecialchars($role) ?></strong></li>
+            </ul>
+        </section>
 
-        <p><a href="index.php">Retour à l'accueil</a> | <a href="auth/logout.php">Se déconnecter</a></p>
+        <section>
+            <h2>Navigation Privée</h2>
+            <p>
+                <a href="profile.php"><button>Mon Profil</button></a>
+                <a href="dashboard.php"><button>Tableau de Bord</button></a>
+                <a href="resources.php"><button>Mes Ressources</button></a>
+                <a href="index.php"><button>Accueil</button></a>
+                <a href="auth/logout.php"><button>🚪 Se déconnecter</button></a>
+            </p>
+        </section>
     </main>
 </body>
 
