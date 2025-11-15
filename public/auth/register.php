@@ -1,7 +1,6 @@
 <?php
 // Inclure l'autoloader et la configuration
 require_once __DIR__ . '/../../src/utils/autoloader.php';
-require_once __DIR__ . '/../../Database.php';
 
 // Démarrer la session
 session_start();
