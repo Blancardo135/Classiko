@@ -1,5 +1,5 @@
 <?php
-
+require_once __DIR__ . '/DatabaseInterface.php';
 
 class Database{
     private static ?Database $instance = null;
