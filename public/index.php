@@ -3,21 +3,11 @@ require_once __DIR__ . '/../src/utils/autoloader.php';
 require_once __DIR__ . '/../src/config/translations.php';
 require_once __DIR__ . '/../src/config/lang.php';
 
+session_start();
 
-// //page publique
-// session_start();
-
-
-// $userId = $_SESSION['user_id'] ?? null;
-
-
-// if ($userId) {
-//         $email = $_SESSION['email'];
-//         $role = $_SESSION['role'];
-// }
-
-
-// ?>
+$isLoggedIn = isset($_SESSION['user_id']);
+$userFirstname = $_SESSION['firstname'] ?? '';
+?>
 <!DOCTYPE html>
 <html lang="<?= $language ?>">
 
@@ -57,25 +47,41 @@ require_once __DIR__ . '/../src/config/lang.php';
                 <p><a href="/public/team/index.php"><button>Voir les équipes</button></a></p>
                 <p><a href="player/index.php"><button>Voir les joueurs</button></a></p>
 
-                <!-- Partie sur l'authentification et session -->
+                <!-- Pages Publiques -->
                 <section class="menu-section">
-                        <h2>Pages publiques</h2>
-                        <div class="menu-buttons">
-                                <a href="auth/register.php"><button>Créer un compte</button></a>
-                                <a href="auth/login.php"><button>Se connecter</button></a>
-                                <a href="public.php"><button>Page publique</button></a>
-                        </div>
+                    <h2>📰 Pages Publiques</h2>
+                    <div class="menu-buttons">
+                        <a href="public.php"><button>📰 Page Publique</button></a>
+                        <a href="team/index.php"><button>👥 Voir les Équipes</button></a>
+                        <a href="player/index.php"><button>⚽ Voir les Joueurs</button></a>
+                    </div>
                 </section>
 
+                <!-- Authentification -->
                 <section class="menu-section">
-                        <h2>Pages protégées</h2>
-                        <div class="menu-buttons">
-                                <a href="user.php"><button>Espace utilisateur</button></a>
-                                <a href="auth/logout.php"><button>Se déconnecter</button></a>
-                        </div>
+                    <h2>🔐 Authentification</h2>
+                    <div class="menu-buttons">
+                        <?php if (!$isLoggedIn) { ?>
+                            <a href="auth/login.php"><button>🔓 Se Connecter</button></a>
+                            <a href="auth/register.php"><button>✍️ Créer un Compte</button></a>
+                        <?php } else { ?>
+                            <a href="auth/logout.php"><button>🚪 Se Déconnecter</button></a>
+                        <?php } ?>
+                    </div>
                 </section>
 
-                <!-- cookie langue -->
+                <!-- Pages Privées (si connecté) -->
+                <?php if ($isLoggedIn) { ?>
+                <section class="menu-section">
+                    <h2>🔒 Pages Privées</h2>
+                    <div class="menu-buttons">
+                        <a href="private.php"><button>🔒 Page Privée</button></a>
+                        <a href="profile.php"><button>👤 Mon Profil</button></a>
+                        <a href="dashboard.php"><button>📊 Mon Tableau de Bord</button></a>
+                        <a href="resources.php"><button>📁 Mes Ressources</button></a>
+                    </div>
+                </section>
+                <?php } ?>                <!-- cookie langue -->
                 <hr>
                 <form method="get" style="margin-top: 1em;">
                         <label for="lang"><?= t('choose_language') ?> :</label>
