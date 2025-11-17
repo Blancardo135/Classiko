@@ -44,8 +44,8 @@ $userFirstname = $_SESSION['firstname'] ?? '';
 
                 <p><?= t('welcome') ?></p>
 
-                <p><a href="/public/team/index.php"><button><?= t('Voir les équipes') ?></button></a></p>
-                <p><a href="player/index.php"><button><?= t('Voir les joueurs') ?></button></a></p>
+                <p><a href="/public/team/index.php"><button>Voir les équipes</button></a></p>
+                <p><a href="player/index.php"><button>Voir les joueurs</button></a></p>
 
                 <!-- Pages Publiques -->
                 <section class="menu-section">
