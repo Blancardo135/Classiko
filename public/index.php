@@ -49,23 +49,23 @@ $userFirstname = $_SESSION['firstname'] ?? '';
 
                 <!-- Pages Publiques -->
                 <section class="menu-section">
-                    <h2>📰 Pages Publiques</h2>
+                    <h2>Pages Publiques</h2>
                     <div class="menu-buttons">
-                        <a href="public.php"><button>📰 Page Publique</button></a>
-                        <a href="team/index.php"><button>👥 Voir les Équipes</button></a>
-                        <a href="player/index.php"><button>⚽ Voir les Joueurs</button></a>
+                        <a href="public.php"><button>Page Publique</button></a>
+                        <a href="team/index.php"><button>Voir les Équipes</button></a>
+                        <a href="player/index.php"><button>Voir les Joueurs</button></a>
                     </div>
                 </section>
 
                 <!-- Authentification -->
                 <section class="menu-section">
-                    <h2>🔐 Authentification</h2>
+                    <h2>Authentification</h2>
                     <div class="menu-buttons">
                         <?php if (!$isLoggedIn) { ?>
-                            <a href="auth/login.php"><button>🔓 Se Connecter</button></a>
-                            <a href="auth/register.php"><button>✍️ Créer un Compte</button></a>
+                            <a href="auth/login.php"><button>Se Connecter</button></a>
+                            <a href="auth/register.php"><button>Créer un Compte</button></a>
                         <?php } else { ?>
-                            <a href="auth/logout.php"><button>🚪 Se Déconnecter</button></a>
+                            <a href="auth/logout.php"><button>Se Déconnecter</button></a>
                         <?php } ?>
                     </div>
                 </section>
@@ -73,12 +73,12 @@ $userFirstname = $_SESSION['firstname'] ?? '';
                 <!-- Pages Privées (si connecté) -->
                 <?php if ($isLoggedIn) { ?>
                 <section class="menu-section">
-                    <h2>🔒 Pages Privées</h2>
+                    <h2>Mes différents espaces</h2>
                     <div class="menu-buttons">
-                        <a href="private.php"><button>🔒 Page Privée</button></a>
-                        <a href="profile.php"><button>👤 Mon Profil</button></a>
-                        <a href="dashboard.php"><button>📊 Mon Tableau de Bord</button></a>
-                        <a href="resources.php"><button>📁 Mes Ressources</button></a>
+                        <a href="private.php"><button>Page Privée</button></a>
+                        <a href="profile.php"><button>Mon Profil</button></a>
+                        <a href="dashboard.php"><button>Mon Tableau de Bord</button></a>
+                        <a href="resources.php"><button>Mes Ressources</button></a>
                     </div>
                 </section>
                 <?php } ?>                <!-- cookie langue -->

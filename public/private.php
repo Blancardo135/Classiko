@@ -29,12 +29,12 @@ $role = $_SESSION['role'];
 
 <body>
     <main class="container">
-        <h1>🔒 Page Privée</h1>
+        <h1>Mon espace personnel</h1>
 
         <p>Cette page est accessible uniquement aux personnes authentifiées.</p>
 
         <section>
-            <h2>✅ Vous êtes connecté.e</h2>
+            <h2>Vous êtes connecté.e</h2>
             <ul>
                 <li><strong>ID utilisateur :</strong> <?= htmlspecialchars($userId) ?></li>
                 <li><strong>Prénom :</strong> <?= htmlspecialchars($_SESSION['firstname'] ?? '') ?></li>
@@ -51,7 +51,7 @@ $role = $_SESSION['role'];
                 <a href="dashboard.php"><button>Tableau de Bord</button></a>
                 <a href="resources.php"><button>Mes Ressources</button></a>
                 <a href="index.php"><button>Accueil</button></a>
-                <a href="auth/logout.php"><button>🚪 Se déconnecter</button></a>
+                <a href="auth/logout.php"><button>Se déconnecter</button></a>
             </p>
         </section>
     </main>

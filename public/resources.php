@@ -26,7 +26,7 @@ $role = $_SESSION['role'];
     <main class="container">
         <h1>Mes Ressources</h1>
 
-        <p>Page privée — Consultez vos équipes et joueurs.</p>
+        <p>Consultez vos équipes et joueurs.</p>
 
         <section>
             <h2>Équipes</h2>

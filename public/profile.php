@@ -26,7 +26,7 @@ $role = $_SESSION['role'];
     <main class="container">
         <h1>Mon Profil</h1>
 
-        <p>Page privée — Vos informations personnelles.</p>
+        <p>Vos informations personnelles.</p>
 
         <section>
             <h2>Informations du Compte</h2>

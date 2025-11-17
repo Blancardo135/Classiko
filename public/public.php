@@ -26,7 +26,7 @@ if ($userId) {
     <main class="container">
         <h1>Page publique</h1>
 
-        <p>Cette page est accessible à toutes les personnes, qu'elles soient connectées ou non.</p>
+        <p>Cette page est accessible à toutes les personnes.</p>
 
         <?php if ($userId) { ?>
             <p><strong>Vous êtes actuellement connecté.e</strong> :</p>
