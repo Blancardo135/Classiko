@@ -24,7 +24,7 @@ $role = $_SESSION['role'];
 
 <body>
     <main class="container">
-        <h1>📊 Mon Tableau de Bord</h1>
+        <h1>Mon Tableau de Bord</h1>
 
         <p>Page privée — Espace personnel.</p>
 
