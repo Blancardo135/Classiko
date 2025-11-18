@@ -41,12 +41,11 @@ $userFirstname = $_SESSION['firstname'] ?? '';
  
 <body>
         <main class="container">
-                <h1>Bienvenue sur Classiko !</h1>
+                <h1>Bienvenue sur Classiko</h1>
  
                 <h3>Créer et gérer vos équipes de rêve !</h3>
-                <p>Vous êtes libre de créer vos propres équipes et vos propres joueurs.
-                <br>Une fois un joueur créé, vous pouvez l'ajouter à l'équipe de votre choix.
-                <br>Créez-vous un compte afin de ne pas perdre vos équipes et profitez de cette application 100% gratuite !</p>
+                <p>Vous êtes libre de créer vos propres équipes et vos propres joueurs. Une fois un joueur créé, vous pouvez l'ajouter à l'équipe de votre choix.
+                Créez-vous un compte afin de ne pas perdre vos équipes et profitez de cette application 100% gratuite !</p>
  
                 <section class="menu-section">
                         <h2>En libre accès</h2>
