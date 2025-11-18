@@ -20,6 +20,18 @@ $userFirstname = $_SESSION['firstname'] ?? '';
         <link rel="stylesheet" href="css/custom.css">
         <title><?= t('home') ?> | <?= t('teams_management') ?></title>
         <style>
+                .menu-container {
+                        display: flex;
+                        gap: 2rem;
+                        margin-bottom: 1.5rem;
+                        flex-wrap: wrap;
+                }
+
+                .menu-section {
+                        flex: 1;
+                        min-width: 250px;
+                }
+
                 .menu-buttons {
                         display: flex;
                         flex-wrap: wrap;
@@ -28,13 +40,14 @@ $userFirstname = $_SESSION['firstname'] ?? '';
                 }
  
                 .menu-buttons a button {
-                        padding: 0.4rem 0.8rem;
-                        font-size: 0.9rem;
+                        padding: 0.3rem 0.7rem;
+                        font-size: 0.85rem;
                         border-radius: 0.5rem;
                 }
  
                 .menu-section h2 {
                         margin-bottom: 0.5rem;
+                        font-size: 1.2rem;
                 }
         </style>
 </head>
@@ -47,30 +60,30 @@ $userFirstname = $_SESSION['firstname'] ?? '';
                 <p>Vous êtes libre de créer vos propres équipes et vos propres joueurs. Une fois un joueur créé, vous pouvez l'ajouter à l'équipe de votre choix.
                 Créez-vous un compte afin de ne pas perdre vos équipes et profitez de cette application 100% gratuite !</p>
  
-                <section class="menu-section">
-                        <h2>En libre accès</h2>
-                        <div class="menu-buttons">
-                                <!-- Raul, tu peux mettre ici le lien vers la page des règles et remplacer "page public"!-->
-                                <a href="public.php"><button>Page Publique</button></a>
-                                <a href="team/index.php"><button>Voir les Équipes</button></a>
-                                <a href="player/index.php"><button>Voir les Joueurs</button></a>
-                        </div>
-                </section>
+                <div class="menu-container">
+                        <section class="menu-section">
+                                <h2>En libre accès</h2>
+                                <div class="menu-buttons">
+                                        <!-- Raul, tu peux mettre ici le lien vers la page des règles et remplacer "page public"!-->
+                                        <a href="public.php"><button>Page Publique</button></a>
+                                        <a href="team/index.php"><button>Voir les Équipes</button></a>
+                                        <a href="player/index.php"><button>Voir les Joueurs</button></a>
+                                </div>
+                        </section>
  
-                <!-- Authentification -->
-                <section class="menu-section">
-                        <h2>Authentification</h2>
-                        <div class="menu-buttons">
-                                <?php if (!$isLoggedIn) { ?>
-                                        <a href="auth/login.php"><button>Se Connecter</button></a>
-                                        <a href="auth/register.php"><button>Créer un Compte</button></a>
-                                <?php } else { ?>
-                                        <a href="auth/logout.php"><button>Se Déconnecter</button></a>
-                                <?php } ?>
-                        </div>
-                </section>
- 
-                <!-- Pages Privées (si connecté) -->
+
+                        <section class="menu-section">
+                                <h2>Authentification</h2>
+                                <div class="menu-buttons">
+                                        <?php if (!$isLoggedIn) { ?>
+                                                <a href="auth/login.php"><button>Se Connecter</button></a>
+                                                <a href="auth/register.php"><button>Créer un Compte</button></a>
+                                        <?php } else { ?>
+                                                <a href="auth/logout.php"><button>Se Déconnecter</button></a>
+                                        <?php } ?>
+                                </div>
+                        </section>
+                </div>
                 <?php if ($isLoggedIn) { ?>
                         <section class="menu-section">
                                 <h2>Mes espaces perso</h2>
@@ -80,7 +93,7 @@ $userFirstname = $_SESSION['firstname'] ?? '';
                                         <a href="resources.php"><button>Mes Ressources</button></a>
                                 </div>
                         </section>
-                <?php } ?> <!-- cookie langue -->
+                <?php } ?>
                 <hr>
                 <form method="get" style="margin-top: 1em;">
                         <label for="lang"><?= t('choose_language') ?> :</label>
@@ -91,7 +104,6 @@ $userFirstname = $_SESSION['firstname'] ?? '';
                 </form>
  
                 <p style="font-size: 0.9em; color: gray;"><?= t('current_language') ?> <?= strtoupper($language) ?></p>
-                <!-- cookie langue -->
         </main>
 </body>
  
