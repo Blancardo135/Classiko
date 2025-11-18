@@ -26,11 +26,13 @@ $role = $_SESSION['role'];
     <main class="container">
         <h1>Mes Ressources</h1>
 
-        <p>Consultez vos équipes et joueurs.</p>
+        <p>Consultez vos créations, mais aussi celles des autres utilisateurs.</p>
+        <!-- Ici on met les équipes du joueur + tout!-->
 
         <section>
             <h2>Équipes</h2>
             <p>Gérez vos équipes :</p>
+            <!-- Mettre ici en plus"Mes équipes"-->
             <p>
                 <a href="team/index.php"><button>Voir toutes les Équipes</button></a>
                 <a href="team/createTeam.php"><button> Créer une Équipe</button></a>
@@ -39,6 +41,7 @@ $role = $_SESSION['role'];
 
         <section>
             <h2>Joueurs</h2>
+            <!-- Mettre ici en plus"Mes joueurs"-->
             <p>Gérez vos joueurs :</p>
             <p>
                 <a href="player/index.php"><button>Voir tous les Joueurs</button></a>
@@ -49,9 +52,6 @@ $role = $_SESSION['role'];
         <section>
             <h2>Navigation</h2>
             <p>
-                <a href="private.php"><button>Page Privée</button></a>
-                <a href="dashboard.php"><button>Tableau de Bord</button></a>
-                <a href="profile.php"><button>Mon Profil</button></a>
                 <a href="index.php"><button>Accueil</button></a>
                 <a href="auth/logout.php"><button>Se déconnecter</button></a>
             </p>

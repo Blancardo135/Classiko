@@ -59,9 +59,8 @@ $role = $_SESSION['role'];
         <section>
             <h2>Actions</h2>
             <p>
-                <a href="private.php"><button>Page Privée</button></a>
                 <a href="dashboard.php"><button>Tableau de Bord</button></a>
-                <a href="index.php"><button>Accueil</button></a>
+            <a href="index.php"><button>Accueil</button></a>
                 <a href="auth/logout.php"><button>Se déconnecter</button></a>
             </p>
         </section>

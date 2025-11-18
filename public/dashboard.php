@@ -34,18 +34,17 @@ $role = $_SESSION['role'];
         </section>
 
         <section>
-            <h2>Accès Rapide</h2>
+            <h2>Consultez uniquement vos créations :</h2>
+            <!-- Ici on met que les équipes du joueur!-->
             <p>
                 <a href="team/index.php"><button>Voir les Équipes</button></a>
                 <a href="player/index.php"><button>Voir les Joueurs</button></a>
-                <a href="profile.php"><button>Mon Profil</button></a>
             </p>
         </section>
 
         <section>
             <h2>Actions</h2>
             <p>
-                <a href="private.php"><button>Page Privée</button></a>
                 <a href="index.php"><button>Accueil</button></a>
                 <a href="auth/logout.php"><button>Se déconnecter</button></a>
             </p>
