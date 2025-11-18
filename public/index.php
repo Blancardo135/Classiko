@@ -41,17 +41,17 @@ $userFirstname = $_SESSION['firstname'] ?? '';
  
 <body>
         <main class="container">
-                <h1><?= t('teams_management') ?></h1>
+                <h1>Bienvenue sur Classiko !</h1>
  
-                <p><?= t('welcome') ?></p>
+                <h3>Créer et gérer vos équipes de rêve !</h3>
+                <p>Vous êtes libre de créer vos propres équipes et vos propres joueurs.
+                <br>Une fois un joueur créé, vous pouvez l'ajouter à l'équipe de votre choix.
+                <br>Créez-vous un compte afin de ne pas perdre vos équipes et profitez de cette application 100% gratuite !</p>
  
-                <p><a href="/public/team/index.php"><button>Voir les équipes</button></a></p>
-                <p><a href="player/index.php"><button>Voir les joueurs</button></a></p>
- 
-                <!-- Pages Publiques -->
                 <section class="menu-section">
                         <h2>En libre accès</h2>
                         <div class="menu-buttons">
+                                <!-- Raul, tu peux mettre ici le lien vers la page des règles et remplacer "page public"!-->
                                 <a href="public.php"><button>Page Publique</button></a>
                                 <a href="team/index.php"><button>Voir les Équipes</button></a>
                                 <a href="player/index.php"><button>Voir les Joueurs</button></a>
@@ -74,9 +74,8 @@ $userFirstname = $_SESSION['firstname'] ?? '';
                 <!-- Pages Privées (si connecté) -->
                 <?php if ($isLoggedIn) { ?>
                         <section class="menu-section">
-                                <h2>Mes différents espaces</h2>
+                                <h2>Mes espaces perso</h2>
                                 <div class="menu-buttons">
-                                        <a href="private.php"><button>Page Privée</button></a>
                                         <a href="profile.php"><button>Mon Profil</button></a>
                                         <a href="dashboard.php"><button>Mon Tableau de Bord</button></a>
                                         <a href="resources.php"><button>Mes Ressources</button></a>
