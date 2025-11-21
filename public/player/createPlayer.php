@@ -7,8 +7,8 @@ use Player\PlayersManager;
 use Player\Player;
 use Team\TeamsManager;
 
-session_start();
-$currentUserId = $_SESSION['user_id'] ?? null;
+require_once __DIR__ . '/../../src/utils/auth.php';
+$currentUserId = requireLogin();
 
 $playersManager = new PlayersManager();
 $teamsManager = new TeamsManager();

@@ -7,13 +7,13 @@ use Player\PlayersManager;
 use Player\Player;
 use Team\TeamsManager;
 
+require_once __DIR__ . '/../../src/utils/auth.php';
+$currentUserId = requireLogin();
+
 $playersManager = new PlayersManager();
 $teamsManager = new TeamsManager();
 
-session_start();
-$currentUserId = $_SESSION['user_id'] ?? null;
 $teams = $teamsManager->getTeams($currentUserId);
-
 $players = $playersManager->getPlayers($currentUserId);
 
 // // //Page privée

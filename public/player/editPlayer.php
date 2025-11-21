@@ -9,8 +9,8 @@ use Player\Player;
 use Team\TeamsManager;
 use Database;
 
-session_start();
-$currentUserId = $_SESSION['user_id'] ?? null;
+require_once __DIR__ . '/../../src/utils/auth.php';
+$currentUserId = requireLogin();
 
 $playersManager = new PlayersManager();
 $teamsManager = new TeamsManager();
@@ -31,7 +31,7 @@ $ownerStmt->bindValue(':id', $playerId, \PDO::PARAM_INT);
 $ownerStmt->execute();
 $owner = $ownerStmt->fetchColumn();
 
-if ($owner !== false && ($currentUserId === null || (int)$owner !== (int)$currentUserId)) {
+if ($owner !== false && ((int)$owner !== (int)$currentUserId)) {
     header('Location: ../403.php');
     exit();
 }

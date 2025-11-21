@@ -3,8 +3,8 @@ require_once __DIR__ . '/../../src/utils/autoloader.php';
 use Team\TeamsManager;
 use Database;
 
-session_start();
-$currentUserId = $_SESSION['user_id'] ?? null;
+require_once __DIR__ . '/../../src/utils/auth.php';
+$currentUserId = requireLogin();
 
 // Création d'une instance de TeamsManager
 $teamsManager = new TeamsManager();
