@@ -215,9 +215,6 @@ Bonjour {$fullname},
 Merci d'avoir créé un compte sur Classiko! Votre inscription a été confirmée avec succès.
 
 Vous pouvez maintenant accéder à tous les services de notre plateforme :
-- Gérer vos équipes
-- Gérer vos joueurs
-- Accéder aux ressources
 
 Votre adresse email : {$this->email}
 
@@ -227,4 +224,6 @@ Si vous avez des questions ou besoin d'aide, n'hésitez pas à nous contacter.
 
 © 2025 Classiko. Tous droits réservés.
 TEXT;
+    }
+
     }
