@@ -1,6 +1,5 @@
 <?php
 
-require_once __DIR__ . '/../utils/autoloader.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
