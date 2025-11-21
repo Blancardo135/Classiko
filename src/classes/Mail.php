@@ -5,7 +5,7 @@ require_once __DIR__ . '/../utils/autoloader.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
  
-const MAIL_CONFIGURATION_FILE = __DIR__ . '/../../config/mail.ini';
+const MAIL_CONFIGURATION_FILE = __DIR__ . '/../config/mail.ini';
  
 class Mail implements MailInterface
 {

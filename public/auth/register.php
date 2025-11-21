@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $success = 'Compte créé avec succès ! Un email de confirmation a été envoyé. Vous pouvez maintenant vous connecter.';
             
          //Romain pour raul et pierre sa c juste un truc qui fait un chargement avant de rediriger vers la page de co après 3s
-            header('Refresh: 3; url=login.php');
+            header('Refresh: 15; url=login.php');
         } catch (Exception $e) {
             $error = 'Erreur : ' . $e->getMessage();
         }
