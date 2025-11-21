@@ -2,13 +2,11 @@
 
 require_once __DIR__ . '/../../src/utils/autoloader.php';
 
-require_once __DIR__ . '/../../src/classes/MailInterface.php';
-require_once __DIR__ . '/../../src/classes/Mail.php';
 
 
 session_start();
 
-// Si l'utilisateur est déjà connecté, le rediriger
+
 if (isset($_SESSION['user_id'])) {
     header('Location: ../index.php');
     exit();
