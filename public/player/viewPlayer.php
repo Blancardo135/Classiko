@@ -20,14 +20,15 @@ if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
 
 $playerId = (int) $_GET['id'];
 
-// ownership check: only owner can view
+
 $pdo = Database::getInstance()->getPdo();
 $ownerStmt = $pdo->prepare('SELECT owner_user_id FROM players WHERE id = :id');
 $ownerStmt->bindValue(':id', $playerId, \PDO::PARAM_INT);
 $ownerStmt->execute();
 $owner = $ownerStmt->fetchColumn();
 
-if ($owner !== false && $currentUserId !== null && (int)$owner !== (int)$currentUserId) {
+
+if ($owner !== false && ((int)$owner !== (int)$currentUserId)) {
     header('Location: ../403.php');
     exit();
 }

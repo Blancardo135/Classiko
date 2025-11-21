@@ -25,7 +25,8 @@ $ownerStmt->bindValue(':id', $teamId, \PDO::PARAM_INT);
 $ownerStmt->execute();
 $owner = $ownerStmt->fetchColumn();
 
-if ($owner !== false && $currentUserId !== null && (int)$owner !== (int)$currentUserId) {
+// Deny access if the team has an owner and the current user is not that owner
+if ($owner !== false && ((int)$owner !== (int)$currentUserId)) {
     header('Location: ../403.php');
     exit();
 }
