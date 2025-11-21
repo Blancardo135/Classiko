@@ -7,9 +7,12 @@ use Player\PlayersManager;
 use Player\Player;
 use Team\TeamsManager;
 
+session_start();
+$currentUserId = $_SESSION['user_id'] ?? null;
+
 $playersManager = new PlayersManager();
 $teamsManager = new TeamsManager();
-$teams = $teamsManager->getTeams();
+$teams = $teamsManager->getTeams($currentUserId);
 
 $errors = [];
 $firstname = $lastname = $country = $club = $position = $team_id = '';
@@ -36,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
     if (empty($errors)) {
         try {
-            $playerId = $playersManager->addPlayer($player);
+            $playerId = $playersManager->addPlayer($player, $currentUserId);
             header("Location: index.php");
             exit();
         } catch (PDOException $e) {

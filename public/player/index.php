@@ -9,9 +9,12 @@ use Team\TeamsManager;
 
 $playersManager = new PlayersManager();
 $teamsManager = new TeamsManager();
-$teams = $teamsManager->getTeams();
 
-$players = $playersManager->getPlayers();
+session_start();
+$currentUserId = $_SESSION['user_id'] ?? null;
+$teams = $teamsManager->getTeams($currentUserId);
+
+$players = $playersManager->getPlayers($currentUserId);
 
 // // //Page privée
 

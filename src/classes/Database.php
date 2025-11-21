@@ -47,7 +47,9 @@ class Database{
             name VARCHAR(100) NOT NULL,
             nbPlayers INT NOT NULL,
             descr TEXT,
-            sport VARCHAR(100) NOT NULL
+            sport VARCHAR(100) NOT NULL,
+            owner_user_id INT DEFAULT NULL,
+            FOREIGN KEY (owner_user_id) REFERENCES users(id) ON DELETE SET NULL
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
 
         $sqlPlayers = "CREATE TABLE IF NOT EXISTS players (
@@ -58,7 +60,9 @@ class Database{
             club VARCHAR(100),
             position VARCHAR(50),
             team_id INT,
-            FOREIGN KEY (team_id) REFERENCES teams(id) ON DELETE SET NULL
+            FOREIGN KEY (team_id) REFERENCES teams(id) ON DELETE SET NULL,
+            owner_user_id INT DEFAULT NULL,
+            FOREIGN KEY (owner_user_id) REFERENCES users(id) ON DELETE SET NULL
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
 
         $sqlUsers = "CREATE TABLE IF NOT EXISTS users (
@@ -74,5 +78,17 @@ class Database{
         $this->pdo->exec($sqlTeams);
         $this->pdo->exec($sqlPlayers);
         $this->pdo->exec($sqlUsers);
+
+        // In case tables existed before, ensure owner_user_id columns exist (best-effort)
+        try {
+            $this->pdo->exec("ALTER TABLE teams ADD COLUMN IF NOT EXISTS owner_user_id INT DEFAULT NULL;");
+        } catch (\Throwable $e) {
+            // ignore
+        }
+        try {
+            $this->pdo->exec("ALTER TABLE players ADD COLUMN IF NOT EXISTS owner_user_id INT DEFAULT NULL;");
+        } catch (\Throwable $e) {
+            // ignore
+        }
     }
 }

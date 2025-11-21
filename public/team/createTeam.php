@@ -6,6 +6,9 @@ require_once __DIR__ . '/../../src/config/lang.php';
 use Team\TeamsManager;
 use Team\Team;
 
+session_start();
+$currentUserId = $_SESSION['user_id'] ?? null;
+
 $teamsManager = new TeamsManager();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -30,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if (empty($errors)) {
         try {
-            $teamId = $teamsManager->addTeam($team);
+            $teamId = $teamsManager->addTeam($team, $currentUserId);
             header("Location: index.php");
             exit();
         } catch (PDOException $e) {

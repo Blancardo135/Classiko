@@ -13,18 +13,25 @@ class PlayersManager implements PlayersManagerInterface
         $this->database = Database::getInstance();
     }
 
-    public function getPlayers(): array {
-        // Requête SQL pour récupérer tous les joueurs
-        $sql = "SELECT * FROM players";
+    public function getPlayers(?int $ownerUserId = null): array {
 
-        // Préparation de la requête
-        $stmt = $this->database->getPdo()->prepare($sql);
-        $stmt->execute();
+        if ($ownerUserId !== null) {
+            $sql = "SELECT p.* FROM players p INNER JOIN users u ON p.owner_user_id = u.id WHERE u.id = :uid";
+            $stmt = $this->database->getPdo()->prepare($sql);
+            $stmt->bindValue(':uid', $ownerUserId, \PDO::PARAM_INT);
+            $stmt->execute();
+            $playersData = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        } else {
+            // Requête SQL pour récupérer tous les joueurs
+            $sql = "SELECT * FROM players";
+            // Préparation de la requête
+            $stmt = $this->database->getPdo()->prepare($sql);
+            $stmt->execute();
+            // Récupération des résultats
+            $playersData = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        }
 
-        // Récupération des résultats
-        $playersData = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
-        // Transformation des tableaux associatifs en objets Player
         $players = array_map(function ($playerData) {
             return new Player(
                 (int)$playerData['id'],
@@ -85,9 +92,9 @@ class PlayersManager implements PlayersManagerInterface
         return $stmt->execute();
     }
 
-    public function addPlayer(Player $player): int {
-        $sql = "INSERT INTO players (firstname, lastname, country, club, position, team_id)
-                VALUES (:firstname, :lastname, :country, :club, :position, :team_id)";
+    public function addPlayer(Player $player, ?int $ownerUserId = null): int {
+        $sql = "INSERT INTO players (firstname, lastname, country, club, position, team_id, owner_user_id)
+                VALUES (:firstname, :lastname, :country, :club, :position, :team_id, :owner_user_id)";
         
         $stmt = $this->database->getPdo()->prepare($sql);
 
@@ -97,6 +104,11 @@ class PlayersManager implements PlayersManagerInterface
         $stmt->bindValue(':club', $player->getClub());
         $stmt->bindValue(':position', $player->getPosition());
         $stmt->bindValue(':team_id', $player->getTeamId(), \PDO::PARAM_INT);
+        if ($ownerUserId === null) {
+            $stmt->bindValue(':owner_user_id', null, \PDO::PARAM_NULL);
+        } else {
+            $stmt->bindValue(':owner_user_id', $ownerUserId, \PDO::PARAM_INT);
+        }
 
         $stmt->execute();
 

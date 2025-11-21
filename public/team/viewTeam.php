@@ -4,6 +4,10 @@ require_once __DIR__ . '/../../src/config/translations.php';
 require_once __DIR__ . '/../../src/config/lang.php';
 
 use Team\TeamsManager;
+use Database;
+
+session_start();
+$currentUserId = $_SESSION['user_id'] ?? null;
 
 $teamsManager = new TeamsManager();
 
@@ -13,6 +17,19 @@ if (!isset($_GET['id'])) {
 }
 
 $teamId = (int) $_GET['id'];
+
+// ownership check
+$pdo = Database::getInstance()->getPdo();
+$ownerStmt = $pdo->prepare('SELECT owner_user_id FROM teams WHERE id = :id');
+$ownerStmt->bindValue(':id', $teamId, \PDO::PARAM_INT);
+$ownerStmt->execute();
+$owner = $ownerStmt->fetchColumn();
+
+if ($owner !== false && $currentUserId !== null && (int)$owner !== (int)$currentUserId) {
+    header('Location: ../403.php');
+    exit();
+}
+
 $team = $teamsManager->getTeamById($teamId);
 
 if (!$team) {

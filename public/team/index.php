@@ -6,8 +6,11 @@ require_once __DIR__ . '/../../src/config/lang.php';
 use Team\TeamsManager;
 use Team\Team;
 
+session_start();
+$currentUserId = $_SESSION['user_id'] ?? null;
+
 $teamsManager = new TeamsManager();
-$teams = $teamsManager->getTeams();
+$teams = $teamsManager->getTeams($currentUserId);
 
 // //Page privée
 
