@@ -2,8 +2,6 @@
 // Inclure l'autoloader et la configuration
 require_once __DIR__ . '/../../src/utils/autoloader.php';
 
-use classes\Mail\Mail;
-
 // Démarrer la session
 session_start();
 
@@ -47,10 +45,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
           
             try {
-                $mailer = new classes\Mail\Mail($firstname, $lastname, $email);
+                $mailer = new Mail($firstname, $lastname, $email);
                 $mailer->sendConfirmationEmail();
             } catch (Exception $mailError) {
-                
+                // Si l'envoi échoue, on garde l'utilisateur créé mais on log l'erreur
                 error_log('Erreur lors de l\'envoi du mail de confirmation : ' . $mailError->getMessage());
             }
             
