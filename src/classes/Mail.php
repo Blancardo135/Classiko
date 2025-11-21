@@ -131,7 +131,10 @@ class Mail implements MailInterface
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenue sur Classiko</title>
     <!--css de IA!-->
-    <style>
+        // If Composer autoloader is available, load it so PHPMailer (installed via Composer) is autoloaded
+        if (file_exists(__DIR__ . '/../../vendor/autoload.php')) {
+            require_once __DIR__ . '/../../vendor/autoload.php';
+        }
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
