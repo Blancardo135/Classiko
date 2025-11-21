@@ -1,8 +1,11 @@
 <?php
-// Inclure l'autoloader et la configuration
+
 require_once __DIR__ . '/../../src/utils/autoloader.php';
 
-// Démarrer la session
+require_once __DIR__ . '/../../src/classes/MailInterface.php';
+require_once __DIR__ . '/../../src/classes/Mail.php';
+
+
 session_start();
 
 // Si l'utilisateur est déjà connecté, le rediriger
