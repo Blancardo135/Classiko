@@ -2,6 +2,8 @@
 // Inclure l'autoloader et la configuration
 require_once __DIR__ . '/../../src/utils/autoloader.php';
 
+use classes\Mail\Mail;
+
 // Démarrer la session
 session_start();
 
@@ -37,14 +39,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = 'Les mots de passe ne correspondent pas.';
     } else {
         try {
-            // Utiliser le UserManager
+            
             $userManager = new userManager();
 
-            // Créer l'utilisateur
+           
             $userManager->createUser($firstname, $lastname, $email, $password, 'user');
-            $success = 'Compte créé avec succès ! Vous pouvez maintenant vous connecter.';
             
-            // Rediriger vers la page de connexion après 3 secondes
+          
+            try {
+                $mailer = new classes\Mail\Mail($firstname, $lastname, $email);
+                $mailer->sendConfirmationEmail();
+            } catch (Exception $mailError) {
+                
+                error_log('Erreur lors de l\'envoi du mail de confirmation : ' . $mailError->getMessage());
+            }
+            
+            $success = 'Compte créé avec succès ! Un email de confirmation a été envoyé. Vous pouvez maintenant vous connecter.';
+            
+         //Romain pour raul et pierre sa c juste un truc qui fait un chargement avant de rediriger vers la page de co après 3s
             header('Refresh: 3; url=login.php');
         } catch (Exception $e) {
             $error = 'Erreur : ' . $e->getMessage();
