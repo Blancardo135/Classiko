@@ -85,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <?php if ($success): ?>
             <article style="background-color: #ddffdd; border: 1px solid #51cf66; padding: 1rem; border-radius: 0.5rem;">
-                <p><strong>✅ Succès :</strong> <?= htmlspecialchars($success) ?></p>
+                <p><strong>Succès :</strong> <?= htmlspecialchars($success) ?></p>
                 <p>Redirection vers la page de connexion...</p>
                 <p><a href="login.php">Cliquez ici si la redirection ne fonctionne pas</a></p>
             </article>
