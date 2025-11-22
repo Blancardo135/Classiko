@@ -58,7 +58,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
          //Romain pour raul et pierre sa c juste un truc qui fait un chargement avant de rediriger vers la page de co après 3s
             header('Refresh: 3; url=login.php');
         } catch (Exception $e) {
-            $error = 'Erreur : ' . $e->getMessage();
+            $msg = $e->getMessage();
+            //Pierre pour romain et le R, chaine de caractères pour pas que ca ecrive erreur: erreur pr le mail (standard)
+            $msg = preg_replace('/^\s*Erreur\s*[:\-–]?\s*/i', '', $msg);
+            $error = $msg;
         }
     }
 }
