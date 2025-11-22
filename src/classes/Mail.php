@@ -49,7 +49,16 @@ class Mail implements MailInterface
                 $mail->SMTPAuth = true;
                 $mail->Username = $username;
                 $mail->Password = $password;
-                $mail->SMTPAutoTLS = true;
+
+                if (!empty($this->config['encryption'])) {
+                    $mail->SMTPSecure = $this->config['encryption'];
+                } else {
+                    if ($port === 465) {
+                        $mail->SMTPSecure = 'ssl';
+                    } elseif ($port === 587) {
+                        $mail->SMTPSecure = 'tls';
+                    }
+                }
             }
 
             $mail->setFrom($fromEmail, $fromName);
