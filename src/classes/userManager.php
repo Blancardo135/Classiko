@@ -13,18 +13,24 @@ class UserManager
     public function createUser(string $firstname, string $lastname, string $email, string $password, string $role = 'user')
     {
         if ($this->emailExists($email)) {
-            return false;
+            throw new \Exception('Un compte existe déjà avec cette adresse e-mail.');
         }
 
         $hash = password_hash($password, PASSWORD_BCRYPT);
         $stmt = $this->pdo->prepare('INSERT INTO users (firstname, lastname, email, password, role) VALUES (:firstname, :lastname, :email, :password, :role)');
-        return $stmt->execute([
+        $result = $stmt->execute([
             ':firstname' => $firstname,
             ':lastname' => $lastname,
             ':email' => $email,
             ':password' => $hash,
             ':role' => $role,
         ]);
+
+        if (!$result) {
+            throw new \Exception('Impossible de créer l\'utilisateur, veuillez réessayer.');
+        }
+
+        return true;
     }
 
     public function emailExists(string $email): bool
