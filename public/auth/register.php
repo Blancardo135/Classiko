@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <?php if ($error): ?>
             <article style="background-color: #ffdddd; border: 1px solid #ff6b6b; padding: 1rem; border-radius: 0.5rem;">
-                <p><strong>❌ Erreur :</strong> <?= htmlspecialchars($error) ?></p>
+                <p><strong>Erreur :</strong> <?= htmlspecialchars($error) ?></p>
             </article>
         <?php endif; ?>
 
