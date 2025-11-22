@@ -39,7 +39,7 @@ $teams = $teamsManager->getTeams($currentUserId);
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
     <link rel="stylesheet" href="../assets/css/custom.css">
 
-    <title><?= t('teams_management') ?> | MyApp</title>
+    <title><?= t('teams_management') ?> | <?= t('app_name') ?></title>
 </head>
 
 <body>

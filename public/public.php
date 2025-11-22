@@ -1,4 +1,7 @@
 <?php
+require_once __DIR__ . '/../src/utils/autoloader.php';
+require_once __DIR__ . '/../src/config/translations.php';
+require_once __DIR__ . '/../src/config/lang.php';
 
 session_start();
 
@@ -19,33 +22,33 @@ if ($userId) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
-    <title>Page publique | Gestionnaire d'équipes</title>
+    <title><?= t('public_page') ?> | <?= t('teams_management') ?></title>
 </head>
 
 <body>
     <main class="container">
-        <h1>Page publique</h1>
+        <h1><?= t('public_page') ?></h1>
 
-        <p>Cette page est accessible à toutes les personnes.</p>
+        <p><?= t('public_page_paragraph') ?></p>
 
         <?php if ($userId) { ?>
-            <p><strong>Vous êtes actuellement connecté.e</strong> :</p>
+            <p><strong><?= t('you_are_currently_logged_in') ?></strong> :</p>
             <ul>
-                <li><strong>ID utilisateur :</strong> <?= htmlspecialchars($userId) ?></li>
-                <li><strong>Email :</strong> <?= htmlspecialchars($email) ?></li>
-                <li><strong>Rôle :</strong> <?= htmlspecialchars($role) ?></li>
+                <li><strong><?= t('label_id') ?> :</strong> <?= htmlspecialchars($userId) ?></li>
+                <li><strong><?= t('label_email') ?> :</strong> <?= htmlspecialchars($email) ?></li>
+                <li><strong><?= t('label_role') ?> :</strong> <?= htmlspecialchars($role) ?></li>
             </ul>
         <?php } else { ?>
-            <p><strong>Vous n'êtes actuellement pas connecté.e.</strong></p>
+            <p><strong><?= t('you_are_not_logged_in') ?></strong></p>
         <?php } ?>
 
         <p>
-            <a href="index.php">Retour à l'accueil</a>
+            <a href="index.php"><?= t('return_home') ?></a>
             <?php if ($userId) { ?>
-                | <a href="auth/logout.php">Se déconnecter</a>
+                | <a href="auth/logout.php"><?= t('logout') ?></a>
             <?php } else { ?>
-                | <a href="auth/login.php">Se connecter</a>
-                | <a href="auth/register.php">Créer un compte</a>
+                | <a href="auth/login.php"><?= t('login') ?></a>
+                | <a href="auth/register.php"><?= t('create_account') ?></a>
             <?php } ?>
         </p>
     </main>

@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../src/utils/autoloader.php';
+require_once __DIR__ . '/../src/config/translations.php';
+require_once __DIR__ . '/../src/config/lang.php';
+
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
@@ -19,34 +23,34 @@ $role = $_SESSION['role'];
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
-    <title>Mon Tableau de Bord | Classiko</title>
+    <title><?= t('dashboard_title') ?> | <?= t('teams_management') ?></title>
 </head>
 
 <body>
     <main class="container">
-        <h1>Mon Tableau de Bord</h1>
+        <h1><?= t('dashboard_title') ?></h1>
 
-        <p>Page privée — Espace personnel.</p>
+        <p><?= t('private_space') ?></p>
 
         <section>
-            <h2>Bienvenue <?= htmlspecialchars($firstname) ?> !</h2>
-            <p>Vous êtes connecté en tant que <strong><?= htmlspecialchars($role) ?></strong>.</p>
+            <h2><?= sprintf(t('welcome_user'), htmlspecialchars($firstname)) ?></h2>
+            <p><?= sprintf(t('you_are_logged_as'), '<strong>' . htmlspecialchars($role) . '</strong>') ?></p>
         </section>
 
         <section>
-            <h2>Consultez uniquement vos créations :</h2>
+            <h2><?= t('check_your_creations') ?></h2>
             <!-- Ici on met que les équipes du joueur!-->
             <p>
-                <a href="team/index.php"><button>Voir les Équipes</button></a>
-                <a href="player/index.php"><button>Voir les Joueurs</button></a>
+                <a href="team/index.php"><button><?= t('view_teams') ?></button></a>
+                <a href="player/index.php"><button><?= t('view_players') ?></button></a>
             </p>
         </section>
 
         <section>
-            <h2>Actions</h2>
+            <h2><?= t('actions') ?></h2>
             <p>
-                <a href="index.php"><button>Accueil</button></a>
-                <a href="auth/logout.php"><button>Se déconnecter</button></a>
+                <a href="index.php"><button><?= t('home') ?></button></a>
+                <a href="auth/logout.php"><button><?= t('logout') ?></button></a>
             </p>
         </section>
     </main>

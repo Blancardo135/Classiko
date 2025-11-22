@@ -11,4 +11,7 @@ $pdo->exec('
         )
     ');
 
-echo "<a href='../index.php'>Retour à l'accueil</a>";
+require_once __DIR__ . '/../../src/config/translations.php';
+require_once __DIR__ . '/../../src/config/lang.php';
+
+echo '<a href="../index.php">' . t('back_home') . '</a>';

@@ -2,6 +2,10 @@
 // Constantes
 const DATABASE_FILE = __DIR__ . '/../teamsmanager.db';
 
+require_once __DIR__ . '/../src/utils/autoloader.php';
+require_once __DIR__ . '/../src/config/translations.php';
+require_once __DIR__ . '/../src/config/lang.php';
+
 // Démarre la session
 session_start();
 
@@ -31,16 +35,16 @@ $role = $_SESSION['role'];
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
-    <title>Espace utilisateur | Gestionnaire d'équipes</title>
+    <title><?= t('user_space_title') ?> | <?= t('teams_management') ?></title>
 </head>
 
 <body>
     <main class="container">
-        <h1>Espace utilisateurs</h1>
+        <h1><?= t('user_space') ?></h1>
 
-        <p>Cette page est accessible uniquement aux utilisateurs.</p>
+        <p><?= t('user_only_page') ?></p>
 
-        <p><a href="index.php">Retour à l'accueil</a> | <a href="./auth/logout.php">Se déconnecter</a></p>
+        <p><a href="index.php"><?= t('return_home') ?></a> | <a href="./auth/logout.php"><?= t('logout') ?></a></p>
     </main>
 </body>
 

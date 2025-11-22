@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta name="color-scheme" content="light dark">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
     <link rel="stylesheet" href="../css/custom.css">
-    <title><?= t('create_team') ?> | MyApp</title>
+    <title><?= t('create_team') ?> | <?= t('app_name') ?></title>
 </head>
 
 <body>

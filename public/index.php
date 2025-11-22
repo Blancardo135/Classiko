@@ -54,43 +54,42 @@ $userFirstname = $_SESSION['firstname'] ?? '';
  
 <body>
         <main class="container">
-                <h1>Bienvenue sur Classiko</h1>
- 
-                <h3>Créer et gérer vos équipes de rêve !</h3>
-                <p>Vous êtes libre de créer vos propres équipes et vos propres joueurs. Une fois un joueur créé, vous pouvez l'ajouter à l'équipe de votre choix.
-                Créez-vous un compte afin de ne pas perdre vos équipes et profitez de cette application 100% gratuite !</p>
+                <h1><?= t('welcome_title') ?></h1>
+
+                <h3><?= t('hero_subtitle') ?></h3>
+                <p><?= t('hero_paragraph') ?></p>
  
                 <div class="menu-container">
                         <section class="menu-section">
-                                <h2>En libre accès</h2>
+                                <h2><?= t('public_access') ?></h2>
                                 <div class="menu-buttons">
                                         <!-- Raul, tu peux mettre ici le lien vers la page des règles et remplacer "page public"!-->
-                                        <a href="public.php"><button>Page Publique</button></a>
-                                        <a href="team/index.php"><button>Voir les Équipes</button></a>
-                                        <a href="player/index.php"><button>Voir les Joueurs</button></a>
+                                        <a href="public.php"><button><?= t('public_page') ?></button></a>
+                                        <a href="team/index.php"><button><?= t('view_teams') ?></button></a>
+                                        <a href="player/index.php"><button><?= t('view_players') ?></button></a>
                                 </div>
                         </section>
  
 
                         <section class="menu-section">
-                                <h2>Authentification</h2>
+                                <h2><?= t('authentication') ?></h2>
                                 <div class="menu-buttons">
                                         <?php if (!$isLoggedIn) { ?>
-                                                <a href="auth/login.php"><button>Se Connecter</button></a>
-                                                <a href="auth/register.php"><button>Créer un Compte</button></a>
+                                                        <a href="auth/login.php"><button><?= t('login') ?></button></a>
+                                                        <a href="auth/register.php"><button><?= t('create_account') ?></button></a>
                                         <?php } else { ?>
-                                                <a href="auth/logout.php"><button>Se Déconnecter</button></a>
+                                                        <a href="auth/logout.php"><button><?= t('logout') ?></button></a>
                                         <?php } ?>
                                 </div>
                         </section>
                 </div>
                 <?php if ($isLoggedIn) { ?>
                         <section class="menu-section">
-                                <h2>Mes espaces perso</h2>
+                                        <h2><?= t('my_areas') ?></h2>
                                 <div class="menu-buttons">
-                                        <a href="profile.php"><button>Mon Profil</button></a>
-                                        <a href="dashboard.php"><button>Mon Tableau de Bord</button></a>
-                                        <a href="resources.php"><button>Mes Ressources</button></a>
+                                                <a href="profile.php"><button><?= t('my_profile') ?></button></a>
+                                                <a href="dashboard.php"><button><?= t('dashboard_label') ?></button></a>
+                                                <a href="resources.php"><button><?= t('resources_label') ?></button></a>
                                 </div>
                         </section>
                 <?php } ?>

@@ -65,19 +65,31 @@ class Mail implements MailInterface
             $mail->addAddress($this->email, trim($this->firstname . ' ' . $this->lastname));
 
             $mail->isHTML(true);
-            $mail->Subject = 'Bienvenue sur Classiko, confirmation d\'inscription';
 
-            $body = '<p>Bonjour ' . htmlspecialchars($this->firstname, ENT_QUOTES, 'UTF-8') . ' ' . htmlspecialchars($this->lastname, ENT_QUOTES, 'UTF-8') . ',</p>' .
-                '<p>Merci pour votre inscription sur <strong>Classiko</strong> !</p>' .
-                '<p>Votre compte a bien été créé avec l\'adresse : ' . htmlspecialchars($this->email, ENT_QUOTES, 'UTF-8') . '.</p>' .
-                '<p>Vous pouvez maintenant vous connecter en utilisant votre adresse email et votre mot de passe.</p>' .
-                '<p>Cordialement,<br>Équipe Classiko</p>';
+            // Use translations when available (safe fallback to literals)
+            $subject = function_exists('t') ? t('email_subject_welcome') : 'Bienvenue sur Classiko, confirmation d\'inscription';
+            $mail->Subject = $subject;
+
+            if (function_exists('t')) {
+                $htmlTemplate = t('email_body_welcome_html');
+                $textTemplate = t('email_body_welcome_text');
+                $body = sprintf($htmlTemplate, htmlspecialchars($this->firstname, ENT_QUOTES, 'UTF-8'), htmlspecialchars($this->lastname, ENT_QUOTES, 'UTF-8'), htmlspecialchars($this->email, ENT_QUOTES, 'UTF-8'));
+                $alt = sprintf($textTemplate, $this->firstname, $this->lastname, $this->email);
+            } else {
+                $body = '<p>Bonjour ' . htmlspecialchars($this->firstname, ENT_QUOTES, 'UTF-8') . ' ' . htmlspecialchars($this->lastname, ENT_QUOTES, 'UTF-8') . ',</p>' .
+                    '<p>Merci pour votre inscription sur <strong>Classiko</strong> !</p>' .
+                    '<p>Votre compte a bien été créé avec l\'adresse : ' . htmlspecialchars($this->email, ENT_QUOTES, 'UTF-8') . '.</p>' .
+                    '<p>Vous pouvez maintenant vous connecter en utilisant votre adresse email et votre mot de passe.</p>' .
+                    '<p>Cordialement,<br>Équipe Classiko</p>';
+
+                $alt = 'Bonjour ' . $this->firstname . ' ' . $this->lastname . "\n\n" .
+                    'Merci pour votre inscription sur Classiko !\n' .
+                    'Votre compte a bien été créé avec l\'adresse : ' . $this->email . "\n\n" .
+                    'Cordialement,\nÉquipe Classiko';
+            }
 
             $mail->Body = $body;
-            $mail->AltBody = 'Bonjour ' . $this->firstname . ' ' . $this->lastname . "\n\n" .
-                'Merci pour votre inscription sur Classiko !\n' .
-                'Votre compte a bien été créé avec l\'adresse : ' . $this->email . "\n\n" .
-                'Cordialement,\nÉquipe Classiko';
+            $mail->AltBody = $alt;
 
             if (!$mail->send()) {
                 throw new \Exception('Erreur lors de l\'envoi de l\'email : ' . $mail->ErrorInfo);

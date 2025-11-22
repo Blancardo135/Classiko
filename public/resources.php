@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../src/utils/autoloader.php';
+require_once __DIR__ . '/../src/config/translations.php';
+require_once __DIR__ . '/../src/config/lang.php';
+
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
@@ -19,41 +23,39 @@ $role = $_SESSION['role'];
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
-    <title>Mes Ressources | Classiko</title>
+    <title><?= t('resources_label') ?> | <?= t('teams_management') ?></title>
 </head>
 
 <body>
     <main class="container">
-        <h1>Mes Ressources</h1>
+        <h1><?= t('resources_label') ?></h1>
 
-        <p>Consultez vos créations, mais aussi celles des autres utilisateurs.</p>
+        <p><?= t('resources_paragraph') ?></p>
         <!-- Ici on met les équipes du joueur + tout!-->
 
         <section>
-            <h2>Équipes</h2>
-            <p>Gérez vos équipes :</p>
-            <!-- Mettre ici en plus"Mes équipes"-->
+            <h2><?= t('teams_section') ?></h2>
+            <p><?= t('manage_your_teams') ?></p>
             <p>
-                <a href="team/index.php"><button>Voir toutes les Équipes</button></a>
-                <a href="team/createTeam.php"><button> Créer une Équipe</button></a>
+                <a href="team/index.php"><button><?= t('view_all_teams') ?></button></a>
+                <a href="team/createTeam.php"><button><?= t('create_team_button') ?></button></a>
             </p>
         </section>
 
         <section>
-            <h2>Joueurs</h2>
-            <!-- Mettre ici en plus"Mes joueurs"-->
-            <p>Gérez vos joueurs :</p>
+            <h2><?= t('players_section') ?></h2>
+            <p><?= t('manage_your_players') ?></p>
             <p>
-                <a href="player/index.php"><button>Voir tous les Joueurs</button></a>
-                <a href="player/createPlayer.php"><button> Créer un Joueur</button></a>
+                <a href="player/index.php"><button><?= t('view_all_players') ?></button></a>
+                <a href="player/createPlayer.php"><button><?= t('create_player_button') ?></button></a>
             </p>
         </section>
 
         <section>
-            <h2>Navigation</h2>
+            <h2><?= t('navigation') ?></h2>
             <p>
-                <a href="index.php"><button>Accueil</button></a>
-                <a href="auth/logout.php"><button>Se déconnecter</button></a>
+                <a href="index.php"><button><?= t('home') ?></button></a>
+                <a href="auth/logout.php"><button><?= t('logout') ?></button></a>
             </p>
         </section>
     </main>

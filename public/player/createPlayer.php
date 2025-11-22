@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
     <link rel="stylesheet" href="../assets/css/custom.css">
 
-    <title><?= t('create_newPlayer') ?> | MyApp</title>
+    <title><?= t('create_newPlayer') ?> | <?= t('app_name') ?></title>
 </head>
 
 <body>

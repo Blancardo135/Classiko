@@ -13,7 +13,8 @@ class UserManager
     public function createUser(string $firstname, string $lastname, string $email, string $password, string $role = 'user')
     {
         if ($this->emailExists($email)) {
-            throw new \Exception('Un compte existe déjà avec cette adresse e-mail.');
+            $msg = function_exists('t') ? t('error_email_exists') : 'Un compte existe déjà avec cette adresse e-mail.';
+            throw new \Exception($msg);
         }
 
         $hash = password_hash($password, PASSWORD_BCRYPT);
@@ -27,7 +28,8 @@ class UserManager
         ]);
 
         if (!$result) {
-            throw new \Exception('Impossible de créer l\'utilisateur, veuillez réessayer.');
+            $msg = function_exists('t') ? t('error_create_user') : 'Impossible de créer l\'utilisateur, veuillez réessayer.';
+            throw new \Exception($msg);
         }
 
         return true;
