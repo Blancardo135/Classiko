@@ -5,9 +5,7 @@ require_once __DIR__ . '/../src/config/lang.php';
 
 session_start();
 
-
 $userId = $_SESSION['user_id'] ?? null;
-
 
 if ($userId) {
     $email = $_SESSION['email'];
@@ -41,6 +39,19 @@ if ($userId) {
         <?php } else { ?>
             <p><strong><?= t('you_are_not_logged_in') ?></strong></p>
         <?php } ?>
+
+        <details>
+            <summary><strong>Règles d'utilisation</strong></summary>
+            <p>Ce site permet la création et la gestion d'équipes sportives de manière collaborative.</p>
+            <ul>
+                <li>Respectez les autres utilisateurs en tout temps.</li>
+                <li>Les informations fournies dans les équipes doivent être exactes.</li>
+                <li>Les comptes avec des activités suspectes peuvent être suspendus.</li>
+                <li>Seuls les utilisateurs connectés peuvent créer ou modifier des équipes et joueurs.</li>
+                <li>Les administrateurs peuvent accéder à tous les comptes pour des raisons de modération.</li>
+            </ul>
+            <p>En utilisant ce site, vous acceptez ces règles.</p>
+        </details>
 
         <p>
             <a href="index.php"><?= t('return_home') ?></a>
