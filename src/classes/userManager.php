@@ -62,6 +62,23 @@ class UserManager
         $stmt->execute([':id' => $id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function getAllUsers()
+    {
+        $stmt = $this->pdo->prepare('SELECT id, firstname, lastname, email, role FROM users ORDER BY id ASC');
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function updateUserRole(int $userId, string $newRole): bool
+    {
+        $stmt = $this->pdo->prepare('UPDATE users SET role = :role WHERE id = :id');
+        $result = $stmt->execute([
+            ':role' => $newRole,
+            ':id' => $userId,
+        ]);
+        return (bool)$result;
+    }
 }
 
 

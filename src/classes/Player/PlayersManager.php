@@ -121,6 +121,16 @@ class PlayersManager implements PlayersManagerInterface
         $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
         return $stmt->execute();
     }
+
+    public function getAllPlayersWithOwner(): array {
+        $sql = "SELECT p.*, u.firstname as owner_firstname, u.lastname as owner_lastname, u.email as owner_email 
+                FROM players p 
+                LEFT JOIN users u ON p.owner_user_id = u.id 
+                ORDER BY p.id DESC";
+        $stmt = $this->database->getPdo()->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }
 // require_once __DIR__ . '/Database.php';
 // require_once __DIR__ . '/Player.php';

@@ -165,6 +165,23 @@ $translations = [
         // User errors
         'error_email_exists' => 'An account already exists with this email address.',
         'error_create_user' => 'Unable to create the user, please try again.',
+        // Admin panel
+        'admin_panel_title' => 'User Management',
+        'admin_panel' => 'Admin Panel',
+        'users_list' => 'Users List',
+        'all_users' => 'All Users',
+        'user_firstname' => 'First Name',
+        'user_lastname' => 'Last Name',
+        'user_email' => 'Email',
+        'user_role' => 'Role',
+        'user_id' => 'ID',
+        'make_admin' => 'Make Admin',
+        'revoke_admin' => 'Revoke Admin',
+        'role_admin' => 'Admin',
+        'role_user' => 'User',
+        'admin_access_denied' => 'Admin access denied. You do not have the necessary permissions.',
+        'all_players' => 'All Players',
+        'all_teams' => 'All Teams',
     ],
 
     'fr' => [
@@ -320,6 +337,23 @@ $translations = [
         // Erreurs utilisateur
         'error_email_exists' => 'Un compte existe déjà avec cette adresse e-mail.',
         'error_create_user' => 'Impossible de créer l\'utilisateur, veuillez réessayer.',
+        // Panneau admin
+        'admin_panel_title' => 'Gestion des utilisateurs',
+        'admin_panel' => 'Panneau d\'administration',
+        'users_list' => 'Liste des utilisateurs',
+        'all_users' => 'Tous les utilisateurs',
+        'user_firstname' => 'Prénom',
+        'user_lastname' => 'Nom',
+        'user_email' => 'Email',
+        'user_role' => 'Rôle',
+        'user_id' => 'ID',
+        'make_admin' => 'Rendre administrateur',
+        'revoke_admin' => 'Révoquer administrateur',
+        'role_admin' => 'Administrateur',
+        'role_user' => 'Utilisateur',
+        'admin_access_denied' => 'Accès administrateur refusé. Vous n\'avez pas les autorisations nécessaires.',
+        'all_players' => 'Tous les joueurs',
+        'all_teams' => 'Toutes les équipes',
         // Page d'accueil
         'welcome_title' => 'Bienvenue sur Classiko',
         'hero_subtitle' => 'Créer et gérer vos équipes de rêve !',

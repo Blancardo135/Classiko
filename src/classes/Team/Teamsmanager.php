@@ -117,4 +117,15 @@ class TeamsManager implements TeamsManagerInterface
         $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
         return $stmt->execute();
     }
+
+    public function getAllTeamsWithOwner(): array
+    {
+        $sql = "SELECT t.*, u.firstname as owner_firstname, u.lastname as owner_lastname, u.email as owner_email 
+                FROM teams t 
+                LEFT JOIN users u ON t.owner_user_id = u.id 
+                ORDER BY t.id DESC";
+        $stmt = $this->database->getPdo()->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }

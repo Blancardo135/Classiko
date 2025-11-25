@@ -14,6 +14,25 @@ function requireLogin(): int
     return (int)$currentUserId;
 }
 
+function requireAdmin(): int
+{
+    session_start();
+    $currentUserId = $_SESSION['user_id'] ?? null;
+    $userRole = $_SESSION['role'] ?? null;
+
+    if ($currentUserId === null) {
+        header('Location: ../auth/login.php');
+        exit();
+    }
+
+    if ($userRole !== 'admin') {
+        header('Location: ../403.php');
+        exit();
+    }
+
+    return (int)$currentUserId;
+}
+
 function requireOwnership(string $table, int $resourceId, int $currentUserId): void
 {
     $pdo = \Database::getInstance()->getPdo();
@@ -27,3 +46,4 @@ function requireOwnership(string $table, int $resourceId, int $currentUserId): v
         exit();
     }
 }
+
