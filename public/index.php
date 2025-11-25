@@ -7,6 +7,7 @@ session_start();
  
 $isLoggedIn = isset($_SESSION['user_id']);
 $userFirstname = $_SESSION['firstname'] ?? '';
+$userRole = $_SESSION['role'] ?? '';
  
 ?>
 <!DOCTYPE html>
@@ -90,6 +91,16 @@ $userFirstname = $_SESSION['firstname'] ?? '';
                                                 <a href="profile.php"><button><?= t('my_profile') ?></button></a>
                                                 <a href="dashboard.php"><button><?= t('dashboard_label') ?></button></a>
                                                 <a href="resources.php"><button><?= t('resources_label') ?></button></a>
+                                </div>
+                        </section>
+                <?php } ?>
+                <?php if ($isLoggedIn && $userRole === 'admin') { ?>
+                        <section class="menu-section">
+                                        <h2><?= t('admin_panel') ?></h2>
+                                <div class="menu-buttons">
+                                                <a href="admin/users.php"><button><?= t('admin_panel_title') ?></button></a>
+                                                <a href="admin/players.php"><button><?= t('players_management') ?></button></a>
+                                                <a href="admin/teams.php"><button><?= t('teams_management') ?></button></a>
                                 </div>
                         </section>
                 <?php } ?>

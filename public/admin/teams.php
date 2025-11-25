@@ -33,6 +33,9 @@ $teams = $teamsManager->getAllTeamsWithOwner();
 
         <h2><?= t('all_teams') ?></h2>
 
+        <?php if (empty($teams)): ?>
+            <p><?= t('not_found') ?></p>
+        <?php else: ?>
         <table>
             <thead>
                 <tr>
@@ -59,6 +62,7 @@ $teams = $teamsManager->getAllTeamsWithOwner();
                 <?php endforeach; ?>
             </tbody>
         </table>
+        <?php endif; ?>
 
         <p>
             <a href="users.php"><button><?= t('admin_panel') ?></button></a>

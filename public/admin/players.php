@@ -33,6 +33,9 @@ $players = $playersManager->getAllPlayersWithOwner();
 
         <h2><?= t('all_players') ?></h2>
 
+        <?php if (empty($players)): ?>
+            <p><?= t('not_found') ?></p>
+        <?php else: ?>
         <table>
             <thead>
                 <tr>
@@ -63,6 +66,7 @@ $players = $playersManager->getAllPlayersWithOwner();
                 <?php endforeach; ?>
             </tbody>
         </table>
+        <?php endif; ?>
 
         <p>
             <a href="users.php"><button><?= t('admin_panel') ?></button></a>
