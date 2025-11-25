@@ -3,7 +3,7 @@ require_once __DIR__ . '/../../src/utils/autoloader.php';
 require_once __DIR__ . '/../../src/config/translations.php';
 require_once __DIR__ . '/../../src/config/lang.php';
 
-use Database;
+// use Database;
 
 require_once __DIR__ . '/../../src/utils/auth.php';
 $currentUserId = requireAdmin();

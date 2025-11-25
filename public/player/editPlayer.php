@@ -7,7 +7,7 @@ require_once __DIR__ . '/../../src/config/lang.php';
 use Player\PlayersManager;
 use Player\Player;
 use Team\TeamsManager;
-use Database;
+// use Database;
 
 require_once __DIR__ . '/../../src/utils/auth.php';
 $currentUserId = requireLogin();
