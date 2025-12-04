@@ -17,7 +17,7 @@ if (isset($_COOKIE['language']) && in_array($_COOKIE['language'], SUPPORTED_LANG
     $language = $_COOKIE['language'];
 }
 
-// Fonction de traduction
+// ça cest pour les traductions
 function t($key)
 {
     global $translations, $language;
