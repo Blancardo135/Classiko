@@ -37,6 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             header("Location: index.php");
             exit();
         } catch (PDOException $e) {
+            //de la part de Romain, le 23000 c'est si y a une violation de contrainte de la bd
             if ($e->getCode() === "23000") {
                 $errors[] = t('tool_exists');
             } else {

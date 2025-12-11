@@ -7,7 +7,7 @@ require_once __DIR__ . '/../../src/config/lang.php';
 use Player\PlayersManager;
 use Player\Player;
 use Team\TeamsManager;
-// use Database;
+
 
 require_once __DIR__ . '/../../src/utils/auth.php';
 $currentUserId = requireLogin();
@@ -24,7 +24,7 @@ if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
 
 $playerId = (int) $_GET['id'];
 
-// ownership check
+
 $pdo = Database::getInstance()->getPdo();
 $ownerStmt = $pdo->prepare('SELECT owner_user_id FROM players WHERE id = :id');
 $ownerStmt->bindValue(':id', $playerId, \PDO::PARAM_INT);

@@ -14,7 +14,7 @@ $teamsManager = new TeamsManager();
 if (isset($_GET["id"])) {
     $playerId = (int) $_GET["id"];
 
-    // ownership check
+    
     $pdo = Database::getInstance()->getPdo();
     $ownerStmt = $pdo->prepare('SELECT owner_user_id FROM players WHERE id = :id');
     $ownerStmt->bindValue(':id', $playerId, \PDO::PARAM_INT);
@@ -26,7 +26,7 @@ if (isset($_GET["id"])) {
         exit();
     }
 
-    // delete
+    // ça cest pour delete
     $playersManager->removePlayer($playerId);
     header("Location: index.php");
     exit();

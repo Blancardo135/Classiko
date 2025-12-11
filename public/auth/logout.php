@@ -3,19 +3,17 @@ require_once __DIR__ . '/../../src/utils/autoloader.php';
 require_once __DIR__ . '/../../src/config/translations.php';
 require_once __DIR__ . '/../../src/config/lang.php';
 
-// Démarrer la session
-session_start();
 
-// Vérifie si l'utilisateur est authentifié
+session_start();
 $userId = $_SESSION['user_id'] ?? null;
 
 if (!$userId) {
-    // Redirige vers la page de connexion si l'utilisateur n'est pas authentifié
+    
     header('Location: login.php');
     exit();
 }
 
-// Détruit la session
+
 session_destroy();
 ?>
 <!DOCTYPE html>

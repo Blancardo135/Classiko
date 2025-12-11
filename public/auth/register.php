@@ -17,7 +17,6 @@ if (isset($_SESSION['user_id'])) {
 $error = '';
 $success = '';
 
-// Traiter le formulaire d'inscription
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $firstname = trim($_POST['firstname'] ?? '');
     $lastname = trim($_POST['lastname'] ?? '');
@@ -25,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'] ?? '';
     $confirmPassword = $_POST['confirm_password'] ?? '';
 
-    // Validation des données
+
     if (empty($firstname) || empty($lastname) || empty($email) || empty($password) || empty($confirmPassword)) {
         $error = t('error_required_fields');
     } elseif (strlen($firstname) < 2) {
@@ -51,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $mailer = new Mail($firstname, $lastname, $email);
                 $mailer->sendConfirmationEmail();
             } catch (Exception $mailError) {
-                // Si l'envoi échoue, on garde l'utilisateur créé mais on log l'erreur
+                
                 error_log('Erreur lors de l\'envoi du mail de confirmation : ' . $mailError->getMessage());
             }
             

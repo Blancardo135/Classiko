@@ -17,15 +17,13 @@ if (!isset($_GET['id'])) {
 }
 
 $teamId = (int) $_GET['id'];
-
-// ownership check
 $pdo = Database::getInstance()->getPdo();
 $ownerStmt = $pdo->prepare('SELECT owner_user_id FROM teams WHERE id = :id');
 $ownerStmt->bindValue(':id', $teamId, \PDO::PARAM_INT);
 $ownerStmt->execute();
 $owner = $ownerStmt->fetchColumn();
 
-// Deny access if the team has an owner and the current user is not that owner
+
 if ($owner !== false && ((int)$owner !== (int)$currentUserId)) {
     header('Location: ../403.php');
     exit();
@@ -57,6 +55,7 @@ if (!$team) {
             <p><strong><?= t('team_sport') ?> :</strong> <?= htmlspecialchars($team->getSport()) ?></p>
             <p><strong><?= t('team_nbPlayers') ?> :</strong> <?= $team->getNbPlayers() ?></p>
             <p><strong><?= t('team_description') ?> :</strong></p>
+            <!-- nl2br ça transforme les br pour les sauts de lignes -->
             <p><?= nl2br(htmlspecialchars($team->getDescr())) ?></p>
         </article>
 

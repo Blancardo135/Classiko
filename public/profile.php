@@ -30,7 +30,7 @@ $role = $_SESSION['role'];
     <main class="container">
         <h1><?= t('my_profile') ?></h1>
 
-        <p><?= t('your_personal_info') ?? 'Vos informations personnelles.' ?></p>
+        
 
         <section>
             <h2><?= t('account_info') ?></h2>

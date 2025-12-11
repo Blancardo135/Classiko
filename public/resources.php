@@ -31,7 +31,7 @@ $role = $_SESSION['role'];
         <h1><?= t('resources_label') ?></h1>
 
         <p><?= t('resources_paragraph') ?></p>
-        <!-- Ici on met les équipes du joueur + tout!-->
+      
 
         <section>
             <h2><?= t('teams_section') ?></h2>

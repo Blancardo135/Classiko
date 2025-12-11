@@ -3,7 +3,6 @@ require_once __DIR__ . '/../../src/utils/autoloader.php';
 require_once __DIR__ . '/../../src/config/translations.php';
 require_once __DIR__ . '/../../src/config/lang.php';
 
-// use Database;
 
 require_once __DIR__ . '/../../src/utils/auth.php';
 $currentUserId = requireAdmin();
@@ -14,7 +13,6 @@ $users = $userManager->getAllUsers();
 $message = '';
 $error = '';
 
-// Traiter la mise à jour du rôle
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['user_id']) && isset($_POST['new_role'])) {
     $userId = (int) $_POST['user_id'];
     $newRole = trim($_POST['new_role']);
@@ -23,7 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['user_id']) && isset($
         try {
             if ($userManager->updateUserRole($userId, $newRole)) {
                 $message = t('form_submit');
-                // Rafraîchir la liste
                 $users = $userManager->getAllUsers();
             } else {
                 $error = t('unexpected_error') . 'Role update failed.';

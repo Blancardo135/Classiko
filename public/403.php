@@ -3,17 +3,16 @@ require_once __DIR__ . '/../src/utils/autoloader.php';
 require_once __DIR__ . '/../src/config/translations.php';
 require_once __DIR__ . '/../src/config/lang.php';
 
-// Démarre la session
 session_start();
 
-// Vérifie si l'utilisateur est authentifié
+
 if (!isset($_SESSION['user_id'])) {
-    // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+    
     header('Location: auth/login.php');
     exit();
 }
 
-// Refuser l'accès et afficher un message d'erreur avec un code 403 Forbidden
+
 http_response_code(403);
 ?>
 

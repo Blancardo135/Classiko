@@ -2,17 +2,17 @@
 require_once __DIR__ . '/../src/utils/autoloader.php';
 require_once __DIR__ . '/../src/config/translations.php';
 require_once __DIR__ . '/../src/config/lang.php';
- 
+
 session_start();
- 
+
 $isLoggedIn = isset($_SESSION['user_id']);
 $userFirstname = $_SESSION['firstname'] ?? '';
 $userRole = $_SESSION['role'] ?? '';
- 
+
 ?>
 <!DOCTYPE html>
 <html lang="<?= $language ?>">
- 
+
 <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -39,27 +39,27 @@ $userRole = $_SESSION['role'] ?? '';
                         gap: 0.5rem;
                         margin-bottom: 1.5rem;
                 }
- 
+
                 .menu-buttons a button {
                         padding: 0.3rem 0.7rem;
                         font-size: 0.85rem;
                         border-radius: 0.5rem;
                 }
- 
+
                 .menu-section h2 {
                         margin-bottom: 0.5rem;
                         font-size: 1.2rem;
                 }
         </style>
 </head>
- 
+
 <body>
         <main class="container">
                 <h1><?= t('welcome_title') ?></h1>
 
                 <h3><?= t('hero_subtitle') ?></h3>
                 <p><?= t('hero_paragraph') ?></p>
- 
+
                 <div class="menu-container">
                         <section class="menu-section">
                                 <h2><?= t('public_access') ?></h2>
@@ -70,37 +70,37 @@ $userRole = $_SESSION['role'] ?? '';
                                         <a href="player/index.php"><button><?= t('view_players') ?></button></a>
                                 </div>
                         </section>
- 
+
 
                         <section class="menu-section">
                                 <h2><?= t('authentication') ?></h2>
                                 <div class="menu-buttons">
                                         <?php if (!$isLoggedIn) { ?>
-                                                        <a href="auth/login.php"><button><?= t('login') ?></button></a>
-                                                        <a href="auth/register.php"><button><?= t('create_account') ?></button></a>
+                                                <a href="auth/login.php"><button><?= t('login') ?></button></a>
+                                                <a href="auth/register.php"><button><?= t('create_account') ?></button></a>
                                         <?php } else { ?>
-                                                        <a href="auth/logout.php"><button><?= t('logout') ?></button></a>
+                                                <a href="auth/logout.php"><button><?= t('logout') ?></button></a>
                                         <?php } ?>
                                 </div>
                         </section>
                 </div>
                 <?php if ($isLoggedIn) { ?>
                         <section class="menu-section">
-                                        <h2><?= t('my_areas') ?></h2>
+                                <h2><?= t('my_areas') ?></h2>
                                 <div class="menu-buttons">
-                                                <a href="profile.php"><button><?= t('my_profile') ?></button></a>
-                                                <a href="dashboard.php"><button><?= t('dashboard_label') ?></button></a>
-                                                <a href="resources.php"><button><?= t('resources_label') ?></button></a>
+                                        <a href="profile.php"><button><?= t('my_profile') ?></button></a>
+                                        <a href="dashboard.php"><button><?= t('dashboard_label') ?></button></a>
+                                        <a href="resources.php"><button><?= t('resources_label') ?></button></a>
                                 </div>
                         </section>
                 <?php } ?>
                 <?php if ($isLoggedIn && $userRole === 'admin') { ?>
                         <section class="menu-section">
-                                        <h2><?= t('admin_panel') ?></h2>
+                                <h2><?= t('admin_panel') ?></h2>
                                 <div class="menu-buttons">
-                                                <a href="admin/users.php"><button><?= t('admin_panel_title') ?></button></a>
-                                                <a href="admin/players.php"><button><?= t('players_management') ?></button></a>
-                                                <a href="admin/teams.php"><button><?= t('teams_management') ?></button></a>
+                                        <a href="admin/users.php"><button><?= t('admin_panel_title') ?></button></a>
+                                        <a href="admin/players.php"><button><?= t('players_management') ?></button></a>
+                                        <a href="admin/teams.php"><button><?= t('teams_management') ?></button></a>
                                 </div>
                         </section>
                 <?php } ?>
@@ -112,9 +112,9 @@ $userRole = $_SESSION['role'] ?? '';
                                 <option value="en" <?= ($language === 'en') ? 'selected' : '' ?>>English</option>
                         </select>
                 </form>
- 
+                        <!-- stroupper pour majuscule -->
                 <p style="font-size: 0.9em; color: gray;"><?= t('current_language') ?> <?= strtoupper($language) ?></p>
         </main>
 </body>
- 
+
 </html>

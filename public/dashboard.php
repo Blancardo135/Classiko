@@ -39,7 +39,7 @@ $role = $_SESSION['role'];
 
         <section>
             <h2><?= t('check_your_creations') ?></h2>
-            <!-- Ici on met que les équipes du joueur!-->
+            
             <p>
                 <a href="team/index.php"><button><?= t('view_teams') ?></button></a>
                 <a href="player/index.php"><button><?= t('view_players') ?></button></a>

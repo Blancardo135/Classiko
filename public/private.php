@@ -6,17 +6,15 @@ require_once __DIR__ . '/../src/config/translations.php';
 require_once __DIR__ . '/../src/config/lang.php';
 require_once __DIR__ . '/../src/utils/auth.php';
 
-// Vérifie si l'utilisateur est authentifié
+
 $userId = $_SESSION['user_id'] ?? null;
 
-// L'utilisateur n'est pas authentifié
+
 if (!$userId) {
-    // Redirige vers la page de connexion si l'utilisateur n'est pas authentifié
+    
     header('Location: auth/login.php');
     exit();
 }
-
-// Sinon, récupère les autres informations de l'utilisateur
 $email = $_SESSION['email'] ?? '';
 $role = $_SESSION['role'] ?? '';
 ?>
