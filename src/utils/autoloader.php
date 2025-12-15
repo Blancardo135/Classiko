@@ -1,5 +1,5 @@
 <?php
-// charge les classes automatiquement
+
 spl_autoload_register(function ($class) {
     
     $relativePath = str_replace('\\', '/', $class);

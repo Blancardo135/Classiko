@@ -2,7 +2,6 @@
 
 namespace Team;
 
-// Inclusion du système de traduction
 require_once __DIR__ . '/../../config/translations.php';
 require_once __DIR__ . '/../../config/lang.php';
 

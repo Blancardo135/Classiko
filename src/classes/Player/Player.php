@@ -2,7 +2,7 @@
 
 namespace Player;
 
-// Inclusion du système de traduction
+
 require_once __DIR__ . '/../../config/translations.php';
 require_once __DIR__ . '/../../config/lang.php';
 
@@ -16,7 +16,7 @@ class Player implements PlayerInterface {
     private ?int $team_id;
 
     public function __construct(?int $id, string $firstname, string $lastname, string $country, string $club, string $position, ?int $team_id) {
-        // Vérification des données
+        
         if (empty($firstname)) {
             throw new \InvalidArgumentException(t('error_firstname_required'));
         } else if (strlen($firstname) < 2) {
@@ -54,7 +54,6 @@ class Player implements PlayerInterface {
         $this->team_id = $team_id;
     }
 
-    // Getters
     public function getId(): ?int {
         return $this->id;
     }
@@ -83,7 +82,7 @@ class Player implements PlayerInterface {
         return $this->team_id;
     }
 
-    // Setters
+    
     public function setId(?int $id): void {
         $this->id = $id;
     }

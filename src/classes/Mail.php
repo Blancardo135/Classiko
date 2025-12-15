@@ -50,6 +50,7 @@ class Mail implements MailInterface
                 $mail->Username = $username;
                 $mail->Password = $password;
 
+                //Code généré avec l'IA pour résourde le problème des ports.
                 if (!empty($this->config['encryption'])) {
                     $mail->SMTPSecure = $this->config['encryption'];
                 } else {
@@ -66,7 +67,7 @@ class Mail implements MailInterface
 
             $mail->isHTML(true);
 
-            // Use translations when available (safe fallback to literals)
+            
             $subject = function_exists('t') ? t('email_subject_welcome') : 'Bienvenue sur Classiko, confirmation d\'inscription';
             $mail->Subject = $subject;
 

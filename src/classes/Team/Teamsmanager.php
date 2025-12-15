@@ -10,16 +10,15 @@ class TeamsManager implements TeamsManagerInterface
 
     public function __construct()
     {
-        $this->database = Database::getInstance();  // Change juste cette ligne
+        $this->database = Database::getInstance();
     }
 
     /**
-     * Récupère toutes les équipes
      * @return Team[]
      */
     public function getTeams(?int $ownerUserId = null): array
     {
-        // If an owner user id is provided, return only teams owned by that user using INNER JOIN
+        
         if ($ownerUserId !== null) {
             $sql = "SELECT t.* FROM teams t INNER JOIN users u ON t.owner_user_id = u.id WHERE u.id = :uid";
             $stmt = $this->database->getPdo()->prepare($sql);

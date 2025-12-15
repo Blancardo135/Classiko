@@ -79,16 +79,15 @@ class Database{
         $this->pdo->exec($sqlPlayers);
         $this->pdo->exec($sqlUsers);
 
-        // In case tables existed before, ensure owner_user_id columns exist (best-effort)
         try {
             $this->pdo->exec("ALTER TABLE teams ADD COLUMN IF NOT EXISTS owner_user_id INT DEFAULT NULL;");
         } catch (\Throwable $e) {
-            // ignore
+            
         }
         try {
             $this->pdo->exec("ALTER TABLE players ADD COLUMN IF NOT EXISTS owner_user_id INT DEFAULT NULL;");
         } catch (\Throwable $e) {
-            // ignore
+            
         }
     }
 }
