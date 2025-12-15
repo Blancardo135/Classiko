@@ -14,6 +14,7 @@ class TeamsManager implements TeamsManagerInterface
     }
 
     /**
+     * 
      * @return Team[]
      */
     public function getTeams(?int $ownerUserId = null): array
