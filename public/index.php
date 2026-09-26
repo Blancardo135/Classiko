@@ -19,6 +19,38 @@ $userRole = $_SESSION['role'] ?? '';
     'description' => t('home') . ' - ' . t('teams_management'),
 ]); ?>
 
+<style>
+        .menu-container {
+                display: flex;
+                gap: 2rem;
+                margin-bottom: 1.5rem;
+                flex-wrap: wrap;
+        }
+
+        .menu-section {
+                flex: 1;
+                min-width: 250px;
+        }
+
+        .menu-buttons {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+                margin-bottom: 1.5rem;
+        }
+
+        .menu-buttons a button {
+                padding: 0.3rem 0.7rem;
+                font-size: 0.85rem;
+                border-radius: 0.5rem;
+        }
+
+        .menu-section h2 {
+                margin-bottom: 0.5rem;
+                font-size: 1.2rem;
+        }
+</style>
+
 <body>
         <?php render('header'); ?>
         <main class="container">
