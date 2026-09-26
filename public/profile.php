@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../src/utils/autoloader.php';
 require_once __DIR__ . '/../src/config/translations.php';
 require_once __DIR__ . '/../src/config/lang.php';
+require_once __DIR__ . '/../src/functions.php';
 
 session_start();
 
@@ -17,16 +18,15 @@ $email = $_SESSION['email'];
 $role = $_SESSION['role'];
 ?>
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="<?= $language ?? 'fr' ?>">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
-    <title><?= t('my_profile') ?> | <?= t('teams_management') ?></title>
-</head>
+<?php render('head', [
+    'title' => t('my_profile') . ' | ' . t('teams_management'),
+    'description' => t('my_profile') . ' - ' . t('teams_management'),
+]); ?>
 
 <body>
+    <?php render('header'); ?>
     <main class="container">
         <h1><?= t('my_profile') ?></h1>
 
@@ -69,6 +69,7 @@ $role = $_SESSION['role'];
             </p>
         </section>
     </main>
+    <?php render('footer'); ?>
 </body>
 
 </html>

@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../src/utils/autoloader.php';
 require_once __DIR__ . '/../src/config/translations.php';
 require_once __DIR__ . '/../src/config/lang.php';
+require_once __DIR__ . '/../src/functions.php';
 
 session_start();
 
@@ -14,16 +15,15 @@ if ($userId) {
 ?>
 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="<?= $language ?? 'fr' ?>">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
-    <title><?= t('public_page') ?> | <?= t('teams_management') ?></title>
-</head>
+<?php render('head', [
+    'title' => t('public_page') . ' | ' . t('teams_management'),
+    'description' => t('public_page') . ' - ' . t('teams_management'),
+]); ?>
 
 <body>
+    <?php render('header'); ?>
     <main class="container">
         <h1><?= t('public_page') ?></h1>
 
@@ -63,6 +63,7 @@ if ($userId) {
             <?php } ?>
         </p>
     </main>
+    <?php render('footer'); ?>
 </body>
 
 </html>

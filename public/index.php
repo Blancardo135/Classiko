@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../src/utils/autoloader.php';
 require_once __DIR__ . '/../src/config/translations.php';
 require_once __DIR__ . '/../src/config/lang.php';
+require_once __DIR__ . '/../src/functions.php';
 
 session_start();
 
@@ -13,47 +14,13 @@ $userRole = $_SESSION['role'] ?? '';
 <!DOCTYPE html>
 <html lang="<?= $language ?>">
 
-<head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="color-scheme" content="light dark">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
-        <link rel="stylesheet" href="css/custom.css">
-        <title><?= t('home') ?> | <?= t('teams_management') ?></title>
-        <style>
-                .menu-container {
-                        display: flex;
-                        gap: 2rem;
-                        margin-bottom: 1.5rem;
-                        flex-wrap: wrap;
-                }
-
-                .menu-section {
-                        flex: 1;
-                        min-width: 250px;
-                }
-
-                .menu-buttons {
-                        display: flex;
-                        flex-wrap: wrap;
-                        gap: 0.5rem;
-                        margin-bottom: 1.5rem;
-                }
-
-                .menu-buttons a button {
-                        padding: 0.3rem 0.7rem;
-                        font-size: 0.85rem;
-                        border-radius: 0.5rem;
-                }
-
-                .menu-section h2 {
-                        margin-bottom: 0.5rem;
-                        font-size: 1.2rem;
-                }
-        </style>
-</head>
+<?php render('head', [
+    'title' => t('home') . ' | ' . t('teams_management'),
+    'description' => t('home') . ' - ' . t('teams_management'),
+]); ?>
 
 <body>
+        <?php render('header'); ?>
         <main class="container">
                 <h1><?= t('welcome_title') ?></h1>
 
@@ -115,6 +82,7 @@ $userRole = $_SESSION['role'] ?? '';
                         <!-- stroupper pour majuscule -->
                 <p style="font-size: 0.9em; color: gray;"><?= t('current_language') ?> <?= strtoupper($language) ?></p>
         </main>
+        <?php render('footer'); ?>
 </body>
 
 </html>
